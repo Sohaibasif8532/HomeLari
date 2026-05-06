@@ -1,0 +1,11 @@
+{
+  "name": "homelari",
+  "version": "1.0.0",
+  "description": "Home Lari Church Fundraiser Platform",
+  "scripts": {
+    "start": "npx serve . -l $PORT"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
