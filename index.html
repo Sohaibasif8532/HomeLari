@@ -1,600 +1,2522 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Lari — Church Fundraiser Platform</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --gold:#C8A44A; --gold-light:#F5E8C0; --gold-dark:#8B6E2E;
-  --navy:#1A2744; --navy-mid:#2E3F6B; --navy-light:#E8EBF5;
-  --green:#2D7A5F; --green-light:#E3F4EE; --green-dark:#1A5040;
-  --cream:#FAF8F3; --border:#E2DDD5;
-  --text-dark:#1A1A2E; --text-mid:#4A4A6A; --text-light:#8A8AAA;
-  --radius:12px; --radius-lg:20px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text-dark);min-height:100vh}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Lari — Church Fundraiser Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C8A44A;
+      --gold-light: #F5E8C0;
+      --gold-dark: #8B6E2E;
+      --navy: #1A2744;
+      --navy-mid: #2E3F6B;
+      --navy-light: #E8EBF5;
+      --green: #2D7A5F;
+      --green-light: #E3F4EE;
+      --green-dark: #1A5040;
+      --cream: #FAF8F3;
+      --border: #E2DDD5;
+      --text-dark: #1A1A2E;
+      --text-mid: #4A4A6A;
+      --text-light: #8A8AAA;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
 
-/* NAV */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(250,248,243,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px}
-.logo{font-family:'Lora',serif;font-weight:600;font-size:18px;color:var(--navy)}
-.logo span{color:var(--gold)}
-.nav-links{display:flex;gap:4px;align-items:center}
-.nav-btn{background:none;border:none;padding:7px 14px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text-mid);cursor:pointer;transition:all .15s;white-space:nowrap}
-.nav-btn:hover{background:var(--navy-light);color:var(--navy)}
-.nav-btn.active{background:var(--navy);color:#fff}
-.nav-btn.cta{background:var(--gold);color:#fff;margin-left:4px}
-.nav-btn.cta:hover{background:var(--gold-dark)}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-/* PAGES */
-.page{display:none;padding-top:60px;min-height:100vh}
-.page.show{display:block}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh
+    }
 
-/* ===== SHARED ===== */
-.btn-primary{background:var(--gold);color:#fff;border:none;padding:14px 28px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .18s}
-.btn-primary:hover{background:var(--gold-dark);transform:translateY(-1px)}
-.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.4);padding:13px 28px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all .18s}
-.btn-outline:hover{background:rgba(255,255,255,0.1)}
-.btn-full{width:100%;background:var(--navy);color:#fff;border:none;padding:13px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .18s;margin-top:8px}
-.btn-full:hover{background:var(--navy-mid)}
-.btn-full.gold-btn{background:var(--gold)}
-.btn-full.gold-btn:hover{background:var(--gold-dark)}
-.section-label{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.section-title{font-family:'Lora',serif;font-size:clamp(26px,3vw,36px);font-weight:600;color:var(--navy);margin-bottom:14px}
+    /* NAV */
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: rgba(250, 248, 243, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px
+    }
 
-/* ===== LANDING ===== */
-.hero{background:var(--navy);color:#fff;padding:80px 32px 90px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 110%,rgba(200,164,74,0.2) 0%,transparent 70%);pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,164,74,0.15);border:1px solid rgba(200,164,74,0.35);color:var(--gold-light);font-size:12px;font-weight:500;padding:6px 14px;border-radius:100px;margin-bottom:28px;letter-spacing:0.5px;text-transform:uppercase}
-.hero h1{font-family:'Lora',serif;font-size:clamp(34px,5vw,58px);font-weight:600;line-height:1.15;max-width:700px;margin:0 auto 20px}
-.hero h1 em{font-style:italic;color:var(--gold)}
-.hero>p{font-size:18px;color:rgba(255,255,255,0.7);max-width:520px;margin:0 auto 40px;line-height:1.65}
-.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
-.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:64px;flex-wrap:wrap;position:relative;z-index:1}
-.hero-stat .num{font-family:'Lora',serif;font-size:32px;font-weight:600;color:var(--gold)}
-.hero-stat .lbl{font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px}
+    .logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--navy)
+    }
 
-.section{padding:80px 32px}
-.section-inner{max-width:1060px;margin:0 auto}
-.section-sub{font-size:16px;color:var(--text-mid);max-width:540px;line-height:1.65;margin-bottom:48px}
-.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:20px}
-.step-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 22px}
-.step-num{width:34px;height:34px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;margin-bottom:14px}
-.step-card h3{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px}
-.step-card p{font-size:13px;color:var(--text-mid);line-height:1.6}
+    .logo span {
+      color: var(--gold)
+    }
 
-.money-section{background:var(--navy);padding:80px 32px}
-.money-inner{max-width:860px;margin:0 auto;text-align:center}
-.money-inner .section-title{color:#fff}
-.money-inner .section-sub{color:rgba(255,255,255,0.55);margin:0 auto 44px}
-.money-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
-.money-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-lg);padding:28px 20px;text-align:center}
-.money-card .amount{font-family:'Lora',serif;font-size:36px;font-weight:600;margin-bottom:8px}
-.money-card .desc{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.5}
-.church-amount{color:var(--gold)}
-.savings-amount{color:#7ECFA8}
-.sub-amount{color:rgba(255,255,255,0.9)}
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      align-items: center
+    }
 
-.testimonial-section{background:var(--cream);padding:80px 32px;text-align:center}
-.testimonial-inner{max-width:760px;margin:0 auto}
-blockquote{font-family:'Lora',serif;font-size:clamp(17px,2.5vw,22px);font-style:italic;color:var(--navy);line-height:1.65;margin-bottom:20px}
-.quote-attr{font-size:14px;color:var(--text-mid)}
-.quote-attr strong{color:var(--navy);font-weight:600}
+    .nav-btn {
+      background: none;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap
+    }
 
-/* ===== LOGIN ===== */
-.login-wrapper{min-height:calc(100vh - 60px);display:grid;grid-template-columns:1fr 1fr}
-.login-visual{background:var(--navy);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px;text-align:center}
-.login-icon{width:60px;height:60px;background:rgba(200,164,74,0.18);border:2px solid rgba(200,164,74,0.4);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:26px}
-.login-visual h2{font-family:'Lora',serif;font-size:26px;color:#fff;margin-bottom:10px;font-weight:600}
-.login-visual>p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.65;max-width:300px}
-.login-features{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:10px;text-align:left}
-.login-features li{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.65)}
-.login-features li::before{content:'✓';width:18px;height:18px;background:rgba(125,207,168,0.2);border:1px solid rgba(125,207,168,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#7ECFA8;flex-shrink:0}
-.login-form-wrap{display:flex;align-items:center;justify-content:center;padding:60px 40px;background:#fff}
-.login-form-box{width:100%;max-width:380px}
-.login-form-box h2{font-family:'Lora',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:4px}
-.login-sub{font-size:14px;color:var(--text-mid);margin-bottom:32px}
-.form-group{margin-bottom:16px}
-.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text-dark);margin-bottom:5px}
-.form-group input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text-dark);outline:none;transition:border .15s}
-.form-group input:focus{border-color:var(--navy-mid)}
-.form-group input::placeholder{color:var(--text-light)}
-.form-hint{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
-.form-hint label{font-size:13px;font-weight:500;color:var(--text-dark)}
-.form-hint a{font-size:12px;color:var(--gold-dark);text-decoration:none;cursor:pointer}
-.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--text-light);font-size:12px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.btn-google{width:100%;background:#fff;color:var(--text-dark);border:1.5px solid var(--border);padding:11px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .15s}
-.btn-google:hover{background:var(--cream)}
-.signup-link{text-align:center;margin-top:22px;font-size:13px;color:var(--text-mid)}
-.signup-link a{color:var(--gold-dark);font-weight:600;cursor:pointer;text-decoration:none}
+    .nav-btn:hover {
+      background: var(--navy-light);
+      color: var(--navy)
+    }
 
-/* ===== SIGNUP ===== */
-.signup-outer{min-height:calc(100vh - 60px);background:var(--cream);display:flex;align-items:flex-start;justify-content:center;padding:48px 24px 80px}
-.signup-shell{width:100%;max-width:720px}
-.signup-header{text-align:center;margin-bottom:36px}
-.step-pill{display:inline-flex;align-items:center;gap:6px;background:var(--navy-light);color:var(--navy);font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;margin-bottom:14px}
-.signup-header h1{font-family:'Lora',serif;font-size:28px;font-weight:600;color:var(--navy);margin-bottom:6px}
-.signup-header p{font-size:14px;color:var(--text-mid)}
+    .nav-btn.active {
+      background: var(--navy);
+      color: #fff
+    }
 
-.sg-steps{display:flex;align-items:center;justify-content:center;margin-bottom:36px}
-.ss-item{display:flex;align-items:center;gap:8px}
-.ss-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;transition:all .3s;flex-shrink:0}
-.ss-circle.done{background:var(--green);color:#fff}
-.ss-circle.cur{background:var(--navy);color:#fff}
-.ss-circle.todo{background:#fff;color:var(--text-light);border:2px solid var(--border)}
-.ss-label{font-size:12px;font-weight:500;white-space:nowrap}
-.ss-label.done{color:var(--green)}
-.ss-label.cur{color:var(--navy)}
-.ss-label.todo{color:var(--text-light)}
-.ss-line{width:36px;height:2px;background:var(--border);margin:0 6px;transition:background .3s;flex-shrink:0}
-.ss-line.done{background:var(--green)}
+    .nav-btn.cta {
+      background: var(--gold);
+      color: #fff;
+      margin-left: 4px
+    }
 
-.sg-panel{display:none}
-.sg-panel.show{display:block}
-.sg-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px}
-.sg-card h2{font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--navy);margin-bottom:5px}
-.sg-card .card-sub{font-size:14px;color:var(--text-mid);margin-bottom:24px}
+    .nav-btn.cta:hover {
+      background: var(--gold-dark)
+    }
 
-.sg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.sg-full{grid-column:1/-1}
-.sg-half-row{grid-column:1/-1;width:calc((100% - 14px)/2)}
-.sg-label{display:block;font-size:13px;font-weight:500;color:var(--text-dark);margin-bottom:5px}
-.req{color:var(--gold-dark)}
-.sg-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text-dark);outline:none;transition:border .15s}
-.sg-input:focus{border-color:var(--navy-mid)}
-.sg-input::placeholder{color:var(--text-light)}
-.sg-select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text-dark);outline:none;appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8AAA' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;cursor:pointer}
-.sg-select:focus{border-color:var(--navy-mid)}
-.sg-textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text-dark);outline:none;resize:vertical;min-height:80px;transition:border .15s}
-.sg-textarea:focus{border-color:var(--navy-mid)}
+    /* PAGES */
+    .page {
+      display: none;
+      padding-top: 60px;
+      min-height: 100vh
+    }
 
-.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all .2s;background:#fafaf8}
-.upload-zone:hover{border-color:var(--navy-mid);background:var(--navy-light)}
-.upload-zone h4{font-size:14px;font-weight:500;color:var(--navy);margin:8px 0 4px}
-.upload-zone p{font-size:12px;color:var(--text-light)}
-.upload-ok{display:none;align-items:center;gap:12px;background:var(--green-light);border:1px solid rgba(45,122,95,0.25);border-radius:10px;padding:12px 16px;margin-top:12px}
-.upload-ok-icon{width:34px;height:34px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0}
-.upload-ok p{font-size:13px;color:var(--green-dark);font-weight:500;margin:0}
-.upload-ok span{font-size:11px;color:var(--text-light)}
+    .page.show {
+      display: block
+    }
 
-.size-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
-.size-tile{border:1.5px solid var(--border);background:#fff;border-radius:10px;padding:14px 8px;text-align:center;cursor:pointer;transition:all .15s}
-.size-tile:hover{border-color:var(--navy-mid)}
-.size-tile.sel{border-color:var(--navy);background:var(--navy-light)}
-.tile-num{font-size:15px;font-weight:700;color:var(--navy)}
-.tile-lbl{font-size:11px;color:var(--text-light);margin-top:2px}
+    /* ===== SHARED ===== */
+    .btn-primary {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s
+    }
 
-.info-box{background:var(--gold-light);border:1px solid rgba(200,164,74,0.3);border-radius:10px;padding:14px 16px;display:flex;gap:10px;margin-bottom:20px}
-.info-box p{font-size:13px;color:var(--gold-dark);line-height:1.5}
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-1px)
+    }
 
-.pa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.pa-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.pa-thumb{aspect-ratio:3/4;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;gap:6px;position:relative}
-.pa-qr{width:42px;height:42px;background:#fff;border-radius:6px}
-.pa-gold{position:absolute;bottom:0;left:0;right:0;background:var(--gold);height:22px;display:flex;align-items:center;justify-content:center}
-.pa-gold span{font-size:8px;font-weight:700;color:#fff;letter-spacing:0.3px}
-.pa-info{padding:10px 12px}
-.pa-info h4{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:2px}
-.pa-info p{font-size:11px;color:var(--text-light)}
-.pa-card--flyer-preview{cursor:pointer;transition:box-shadow .18s,border-color .18s,transform .18s}
-.pa-card--flyer-preview:hover{border-color:var(--navy-mid);box-shadow:0 8px 28px rgba(26,39,68,0.12);transform:translateY(-2px)}
-.pa-card--flyer-preview:focus-within{outline:2px solid var(--gold);outline-offset:2px}
-.flyer-preview-btn{margin-top:8px;width:100%;background:var(--navy-light);color:var(--navy);border:1.5px solid var(--border);padding:7px 10px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s}
-.flyer-preview-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-.flyer-lightbox{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
-.flyer-lightbox.open{display:flex}
-.flyer-lightbox-backdrop{position:absolute;inset:0;background:rgba(26,39,68,0.55);backdrop-filter:blur(8px)}
-.flyer-lightbox-panel{position:relative;z-index:1;width:100%;max-width:min(480px,94vw)}
-.flyer-lightbox-close{position:absolute;top:-12px;right:-12px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--border);background:#fff;font-size:22px;line-height:1;cursor:pointer;color:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.12);transition:background .15s,border-color .15s}
-.flyer-lightbox-close:hover{background:var(--cream);border-color:var(--navy-mid)}
-.flyer-lightbox-hint{text-align:center;font-size:13px;font-weight:500;color:var(--text-mid);margin:0 0 14px}
-.flyer-lightbox-sheet{background:#fff;border-radius:var(--radius-lg);padding:14px;box-shadow:0 28px 70px rgba(26,39,68,0.28);border:1px solid var(--border)}
-.flyer-lb-mockup{aspect-ratio:8.5/11;background:var(--navy);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(20px,5vw,40px) clamp(18px,4vw,36px);gap:clamp(10px,2.5vw,16px);position:relative;min-height:280px}
-.flyer-lb-name{font-size:clamp(13px,3.2vw,17px);font-weight:700;color:rgba(255,255,255,0.95);text-align:center;text-transform:uppercase;letter-spacing:0.06em;line-height:1.25;padding:0 12px}
-.flyer-lb-tagline{font-size:clamp(11px,2.6vw,14px);color:rgba(255,255,255,0.58);text-align:center;line-height:1.35;padding:0 14px}
-.flyer-lb-loc,.flyer-lb-mem{font-size:clamp(10px,2.2vw,12px);color:rgba(255,255,255,0.48);text-align:center;line-height:1.35;padding:0 14px}
-.flyer-lb-qr{width:clamp(64px,18vw,96px);height:clamp(64px,18vw,96px);background:#fff;border-radius:10px;flex-shrink:0}
-.flyer-lb-band{position:absolute;bottom:0;left:0;right:0;background:var(--gold);height:clamp(32px,8vw,42px);display:flex;align-items:center;justify-content:center;border-radius:0 0 14px 14px}
-.flyer-lb-band span{font-size:clamp(9px,2vw,12px);font-weight:700;color:#fff;letter-spacing:0.04em}
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      padding: 13px 28px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .18s
+    }
 
-.confirm-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;text-align:center}
-.check-circle{width:62px;height:62px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px;border:2px solid rgba(45,122,95,0.25)}
-.confirm-card h2{font-family:'Lora',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:8px}
-.confirm-card>p{font-size:15px;color:var(--text-mid);max-width:420px;margin:0 auto 24px;line-height:1.65}
-.next-steps{background:var(--cream);border-radius:12px;padding:18px 22px;text-align:left;margin-bottom:24px}
-.next-steps h4{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-light);margin-bottom:12px}
-.ns-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)}
-.ns-row:last-child{border:none}
-.ns-dot{width:22px;height:22px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
-.ns-row p{font-size:13px;color:var(--text-dark)}
-.confirm-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.confirm-btns .btn-full{width:auto;padding:12px 24px;margin:0}
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1)
+    }
 
-.sg-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
-.btn-back{background:#fff;color:var(--text-mid);border:1.5px solid var(--border);padding:11px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn-back:hover{border-color:var(--navy);color:var(--navy)}
-.btn-next{background:var(--navy);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .18s}
-.btn-next:hover{background:var(--navy-mid)}
-.btn-next.gold{background:var(--gold)}
-.btn-next.gold:hover{background:var(--gold-dark)}
-.step-hint{font-size:13px;color:var(--text-light)}
+    .btn-full {
+      width: 100%;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 13px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s;
+      margin-top: 8px
+    }
 
-/* ===== ORDER ===== */
-.order-wrapper{max-width:1080px;margin:0 auto;padding:40px 32px}
-.page-hdr{margin-bottom:32px}
-.breadcrumb{font-size:12px;color:var(--text-light);margin-bottom:6px}
-.page-hdr h1{font-family:'Lora',serif;font-size:28px;font-weight:600;color:var(--navy);margin-bottom:5px}
-.page-hdr p{font-size:14px;color:var(--text-mid)}
+    .btn-full:hover {
+      background: var(--navy-mid)
+    }
 
-.prog-bar{display:flex;align-items:center;margin-bottom:36px}
-.prog-item{display:flex;align-items:center;gap:7px}
-.prog-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
-.prog-circle.done{background:var(--green);color:#fff}
-.prog-circle.active{background:var(--navy);color:#fff}
-.prog-circle.todo{background:#fff;color:var(--text-light);border:1.5px solid var(--border)}
-.prog-label{font-size:12px;font-weight:500}
-.prog-label.done{color:var(--green)}
-.prog-label.active{color:var(--navy)}
-.prog-label.todo{color:var(--text-light)}
-.prog-line{flex:1;height:1.5px;background:var(--border);max-width:44px;margin:0 4px}
-.prog-line.done{background:var(--green)}
+    .btn-full.gold-btn {
+      background: var(--gold)
+    }
 
-.order-grid{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
-.sec-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.asset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
-.asset-card{border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .15s;background:#fff}
-.asset-card:hover{border-color:var(--navy-mid)}
-.asset-card.sel{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,39,68,0.1)}
-.a-thumb{aspect-ratio:3/4;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;gap:6px;position:relative}
-.a-logo{width:34px;height:34px;background:rgba(200,164,74,0.4);border-radius:8px}
-.a-line1{width:78%;height:7px;background:rgba(255,255,255,0.8);border-radius:3px}
-.a-line2{width:60%;height:5px;background:rgba(255,255,255,0.4);border-radius:3px}
-.a-qr{width:42px;height:42px;background:#fff;border-radius:5px;margin-top:6px}
-.a-band{position:absolute;bottom:0;left:0;right:0;background:var(--gold);height:26px;display:flex;align-items:center;justify-content:center}
-.a-band span{font-size:8px;font-weight:700;color:#fff;letter-spacing:0.3px}
-.a-check{position:absolute;top:8px;right:8px;width:20px;height:20px;background:var(--navy);border-radius:50%;display:none;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700}
-.asset-card.sel .a-check{display:flex}
-.a-info{padding:10px 12px}
-.a-info h4{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:2px}
-.a-info p{font-size:11px;color:var(--text-light)}
+    .btn-full.gold-btn:hover {
+      background: var(--gold-dark)
+    }
 
-.qty-options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 28px}
-.qty-btn{border:1.5px solid var(--border);background:#fff;border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .15s}
-.qty-btn:hover{border-color:var(--navy-mid)}
-.qty-btn.sel{border-color:var(--navy);background:var(--navy-light)}
-.qty-num{font-size:17px;font-weight:700;color:var(--navy)}
-.qty-label{font-size:11px;color:var(--text-light);margin-top:2px}
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px
+    }
 
-.summary-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;position:sticky;top:76px}
-.summary-card h3{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--navy);margin-bottom:18px}
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px}
-.sum-row:last-of-type{border:none}
-.sum-row .lbl{color:var(--text-mid)}
-.sum-row .val{font-weight:500}
-.sum-total{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0}
-.sum-total .lbl{font-weight:600;color:var(--navy);font-size:15px}
-.sum-total .val{font-family:'Lora',serif;font-size:22px;font-weight:600;color:var(--navy)}
-.church-note{background:var(--green-light);border-radius:10px;padding:12px 14px;margin:14px 0;display:flex;align-items:center;gap:10px}
-.church-note p{font-size:12px;color:var(--green-dark);line-height:1.4}
-.church-note strong{font-weight:600}
-.delivery{font-size:12px;color:var(--text-light);text-align:center;margin-top:10px}
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 14px
+    }
 
-/* ===== DASHBOARD ===== */
-.dash-wrapper{max-width:1180px;margin:0 auto;padding:32px}
-.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:14px}
-.dash-top .greeting h2{font-family:'Lora',serif;font-size:22px;font-weight:600;color:var(--navy)}
-.dash-top .greeting p{font-size:13px;color:var(--text-mid);margin-top:2px}
-.dash-actions{display:flex;gap:10px}
-.btn-sm{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
-.btn-sm.outline{background:#fff;color:var(--navy);border:1.5px solid var(--border)}
-.btn-sm.outline:hover{border-color:var(--navy)}
-.btn-sm.solid{background:var(--navy);color:#fff}
-.btn-sm.solid:hover{background:var(--navy-mid)}
+    /* ===== LANDING ===== */
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: 80px 32px 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
 
-.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin-bottom:24px}
-.metric-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px}
-.metric-card.hl{background:var(--navy)}
-.m-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-light);margin-bottom:7px}
-.metric-card.hl .m-label{color:rgba(255,255,255,0.45)}
-.m-value{font-family:'Lora',serif;font-size:30px;font-weight:600;color:var(--navy);margin-bottom:4px}
-.metric-card.hl .m-value{color:var(--gold)}
-.m-change{font-size:13px;color:var(--green);font-weight:500}
-.metric-card.hl .m-change{color:rgba(255,255,255,0.45)}
-.m-change.neutral{color:var(--text-light)}
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 110%, rgba(200, 164, 74, 0.2) 0%, transparent 70%);
+      pointer-events: none
+    }
 
-.prog-section{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:22px}
-.prog-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
-.prog-hdr h3{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--navy)}
-.prog-hdr span{font-size:13px;color:var(--text-mid)}
-.prog-track{background:var(--navy-light);border-radius:100px;height:11px;overflow:hidden;margin-bottom:8px}
-.prog-fill{background:linear-gradient(90deg,var(--green),#4BAF88);height:100%;border-radius:100px;width:0;transition:width 1.2s ease}
-.prog-sub{display:flex;justify-content:space-between;font-size:12px;color:var(--text-light)}
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200, 164, 74, 0.15);
+      border: 1px solid rgba(200, 164, 74, 0.35);
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase
+    }
 
-.share-section{background:var(--navy);border-radius:var(--radius-lg);padding:24px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
-.share-text h3{font-family:'Lora',serif;font-size:18px;color:#fff;margin-bottom:4px}
-.share-text p{font-size:13px;color:rgba(255,255,255,0.5)}
-.share-graphic{background:rgba(255,255,255,0.06);border:1px solid rgba(200,164,74,0.3);border-radius:12px;padding:18px 26px;text-align:center}
-.share-num{font-family:'Lora',serif;font-size:26px;font-weight:600;color:var(--gold)}
-.share-lbl{font-size:12px;color:rgba(255,255,255,0.45);margin-top:3px}
-.share-btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn-share{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
-.btn-share.copy{background:var(--gold);color:#fff}
-.btn-share.copy:hover{background:var(--gold-dark)}
-.btn-share.dl{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
-.btn-share.dl:hover{background:rgba(255,255,255,0.18)}
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 600;
+      line-height: 1.15;
+      max-width: 700px;
+      margin: 0 auto 20px
+    }
 
-.dash-cols{display:grid;grid-template-columns:1fr 290px;gap:22px;align-items:start}
-.subs-section{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px}
-.subs-section h3{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:14px}
-.subs-table{width:100%;border-collapse:collapse}
-.subs-table th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--text-light);padding:0 10px 9px 0;text-align:left;border-bottom:1px solid var(--border)}
-.subs-table td{font-size:13px;color:var(--text-dark);padding:9px 10px 9px 0;border-bottom:1px solid var(--border)}
-.subs-table tr:last-child td{border:none}
-.s-status{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500}
-.s-status.active{background:var(--green-light);color:var(--green-dark)}
-.s-status.pending{background:var(--gold-light);color:var(--gold-dark)}
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold)
+    }
 
-.timeline-section{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px}
-.timeline-section h3{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:18px}
-.tl-item{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border)}
-.tl-item:last-child{border:none}
-.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.tl-dot.done{background:var(--green)}
-.tl-dot.active{background:var(--gold)}
-.tl-dot.pending{background:var(--border)}
-.tl-content h4{font-size:13px;font-weight:500;color:var(--navy);margin-bottom:2px}
-.tl-content p{font-size:12px;color:var(--text-mid)}
-.tl-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500;margin-top:4px}
-.tl-badge.done{background:var(--green-light);color:var(--green-dark)}
-.tl-badge.active{background:var(--gold-light);color:var(--gold-dark)}
-.tl-badge.pending{background:var(--navy-light);color:var(--navy-mid)}
+    .hero>p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.65
+    }
 
-@media(max-width:900px){
-  .login-wrapper{grid-template-columns:1fr}
-  .login-visual{display:none}
-  .order-grid,.dash-cols{grid-template-columns:1fr}
-  .asset-grid{grid-template-columns:repeat(2,1fr)}
-  .pa-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:600px){
-  .topnav{padding:0 16px}
-  .nav-btn:not(.cta):not(.active){display:none}
-  .hero,.section,.money-section,.testimonial-section{padding:48px 20px}
-  .order-wrapper,.dash-wrapper{padding:24px 16px}
-  .sg-grid{grid-template-columns:1fr}
-  .sg-half-row{width:100%}
-  .size-tiles,.qty-options{grid-template-columns:repeat(2,1fr)}
-  .metrics-grid{grid-template-columns:1fr 1fr}
-  .pa-grid{grid-template-columns:1fr 1fr}
-  .asset-grid{grid-template-columns:1fr 1fr}
-}
-</style>
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      margin-top: 64px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1
+    }
+
+    .hero-stat .num {
+      font-family: 'Lora', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--gold)
+    }
+
+    .hero-stat .lbl {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 4px
+    }
+
+    .section {
+      padding: 80px 32px
+    }
+
+    .section-inner {
+      max-width: 1060px;
+      margin: 0 auto
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--text-mid);
+      max-width: 540px;
+      line-height: 1.65;
+      margin-bottom: 48px
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 20px
+    }
+
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px
+    }
+
+    .step-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px
+    }
+
+    .step-card p {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6
+    }
+
+    .money-section {
+      background: var(--navy);
+      padding: 80px 32px
+    }
+
+    .money-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center
+    }
+
+    .money-inner .section-title {
+      color: #fff
+    }
+
+    .money-inner .section-sub {
+      color: rgba(255, 255, 255, 0.55);
+      margin: 0 auto 44px
+    }
+
+    .money-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px
+    }
+
+    .money-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      text-align: center
+    }
+
+    .money-card .amount {
+      font-family: 'Lora', serif;
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 8px
+    }
+
+    .money-card .desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.5
+    }
+
+    .church-amount {
+      color: var(--gold)
+    }
+
+    .savings-amount {
+      color: #7ECFA8
+    }
+
+    .sub-amount {
+      color: rgba(255, 255, 255, 0.9)
+    }
+
+    .testimonial-section {
+      background: var(--cream);
+      padding: 80px 32px;
+      text-align: center
+    }
+
+    .testimonial-inner {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    blockquote {
+      font-family: 'Lora', serif;
+      font-size: clamp(17px, 2.5vw, 22px);
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.65;
+      margin-bottom: 20px
+    }
+
+    .quote-attr {
+      font-size: 14px;
+      color: var(--text-mid)
+    }
+
+    .quote-attr strong {
+      color: var(--navy);
+      font-weight: 600
+    }
+
+    /* ===== LOGIN ===== */
+    .login-wrapper {
+      min-height: calc(100vh - 60px);
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .login-visual {
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px;
+      text-align: center
+    }
+
+    .login-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(200, 164, 74, 0.18);
+      border: 2px solid rgba(200, 164, 74, 0.4);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      font-size: 26px
+    }
+
+    .login-visual h2 {
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      color: #fff;
+      margin-bottom: 10px;
+      font-weight: 600
+    }
+
+    .login-visual>p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.65;
+      max-width: 300px
+    }
+
+    .login-features {
+      list-style: none;
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left
+    }
+
+    .login-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65)
+    }
+
+    .login-features li::before {
+      content: '✓';
+      width: 18px;
+      height: 18px;
+      background: rgba(125, 207, 168, 0.2);
+      border: 1px solid rgba(125, 207, 168, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #7ECFA8;
+      flex-shrink: 0
+    }
+
+    .login-form-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      background: #fff
+    }
+
+    .login-form-box {
+      width: 100%;
+      max-width: 380px
+    }
+
+    .login-form-box h2 {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px
+    }
+
+    .login-sub {
+      font-size: 14px;
+      color: var(--text-mid);
+      margin-bottom: 32px
+    }
+
+    .form-group {
+      margin-bottom: 16px
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 5px
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border .15s
+    }
+
+    .form-group input:focus {
+      border-color: var(--navy-mid)
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-light)
+    }
+
+    .form-hint {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px
+    }
+
+    .form-hint label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark)
+    }
+
+    .form-hint a {
+      font-size: 12px;
+      color: var(--gold-dark);
+      text-decoration: none;
+      cursor: pointer
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0;
+      color: var(--text-light);
+      font-size: 12px
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border)
+    }
+
+    .btn-google {
+      width: 100%;
+      background: #fff;
+      color: var(--text-dark);
+      border: 1.5px solid var(--border);
+      padding: 11px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background .15s
+    }
+
+    .btn-google:hover {
+      background: var(--cream)
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 13px;
+      color: var(--text-mid)
+    }
+
+    .signup-link a {
+      color: var(--gold-dark);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none
+    }
+
+    /* ===== SIGNUP ===== */
+    .signup-outer {
+      min-height: calc(100vh - 60px);
+      background: var(--cream);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 24px 80px
+    }
+
+    .signup-shell {
+      width: 100%;
+      max-width: 720px
+    }
+
+    .signup-header {
+      text-align: center;
+      margin-bottom: 36px
+    }
+
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy-light);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 14px
+    }
+
+    .signup-header h1 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px
+    }
+
+    .signup-header p {
+      font-size: 14px;
+      color: var(--text-mid)
+    }
+
+    .sg-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px
+    }
+
+    .ss-item {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .ss-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all .3s;
+      flex-shrink: 0
+    }
+
+    .ss-circle.done {
+      background: var(--green);
+      color: #fff
+    }
+
+    .ss-circle.cur {
+      background: var(--navy);
+      color: #fff
+    }
+
+    .ss-circle.todo {
+      background: #fff;
+      color: var(--text-light);
+      border: 2px solid var(--border)
+    }
+
+    .ss-label {
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap
+    }
+
+    .ss-label.done {
+      color: var(--green)
+    }
+
+    .ss-label.cur {
+      color: var(--navy)
+    }
+
+    .ss-label.todo {
+      color: var(--text-light)
+    }
+
+    .ss-line {
+      width: 36px;
+      height: 2px;
+      background: var(--border);
+      margin: 0 6px;
+      transition: background .3s;
+      flex-shrink: 0
+    }
+
+    .ss-line.done {
+      background: var(--green)
+    }
+
+    .sg-panel {
+      display: none
+    }
+
+    .sg-panel.show {
+      display: block
+    }
+
+    .sg-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px
+    }
+
+    .sg-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 5px
+    }
+
+    .sg-card .card-sub {
+      font-size: 14px;
+      color: var(--text-mid);
+      margin-bottom: 24px
+    }
+
+    .sg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .sg-full {
+      grid-column: 1/-1
+    }
+
+    .sg-half-row {
+      grid-column: 1/-1;
+      width: calc((100% - 14px)/2)
+    }
+
+    .sg-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 5px
+    }
+
+    .req {
+      color: var(--gold-dark)
+    }
+
+    .sg-input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border .15s
+    }
+
+    .sg-input:focus {
+      border-color: var(--navy-mid)
+    }
+
+    .sg-input::placeholder {
+      color: var(--text-light)
+    }
+
+    .sg-select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      appearance: none;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8AAA' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+      cursor: pointer
+    }
+
+    .sg-select:focus {
+      border-color: var(--navy-mid)
+    }
+
+    .sg-textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      resize: vertical;
+      min-height: 80px;
+      transition: border .15s
+    }
+
+    .sg-textarea:focus {
+      border-color: var(--navy-mid)
+    }
+
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      background: #fafaf8
+    }
+
+    .upload-zone:hover {
+      border-color: var(--navy-mid);
+      background: var(--navy-light)
+    }
+
+    .upload-zone h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      margin: 8px 0 4px
+    }
+
+    .upload-zone p {
+      font-size: 12px;
+      color: var(--text-light)
+    }
+
+    .upload-ok {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: var(--green-light);
+      border: 1px solid rgba(45, 122, 95, 0.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 12px
+    }
+
+    .upload-ok-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--green);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 15px;
+      flex-shrink: 0
+    }
+
+    .upload-ok p {
+      font-size: 13px;
+      color: var(--green-dark);
+      font-weight: 500;
+      margin: 0
+    }
+
+    .upload-ok span {
+      font-size: 11px;
+      color: var(--text-light)
+    }
+
+    .size-tiles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 6px
+    }
+
+    .size-tile {
+      border: 1.5px solid var(--border);
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .size-tile:hover {
+      border-color: var(--navy-mid)
+    }
+
+    .size-tile.sel {
+      border-color: var(--navy);
+      background: var(--navy-light)
+    }
+
+    .tile-num {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy)
+    }
+
+    .tile-lbl {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 2px
+    }
+
+    .info-box {
+      background: var(--gold-light);
+      border: 1px solid rgba(200, 164, 74, 0.3);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px
+    }
+
+    .info-box p {
+      font-size: 13px;
+      color: var(--gold-dark);
+      line-height: 1.5
+    }
+
+    .pa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .pa-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden
+    }
+
+    .pa-thumb {
+      aspect-ratio: 3/4;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      gap: 6px;
+      position: relative
+    }
+
+    .pa-qr {
+      width: 42px;
+      height: 42px;
+      background: #fff;
+      border-radius: 6px
+    }
+
+    .pa-gold {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--gold);
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .pa-gold span {
+      font-size: 8px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.3px
+    }
+
+    .pa-info {
+      padding: 10px 12px
+    }
+
+    .pa-info h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 2px
+    }
+
+    .pa-info p {
+      font-size: 11px;
+      color: var(--text-light)
+    }
+
+    .pa-card--flyer-preview {
+      cursor: pointer;
+      transition: box-shadow .18s, border-color .18s, transform .18s
+    }
+
+    .pa-card--flyer-preview:hover {
+      border-color: var(--navy-mid);
+      box-shadow: 0 8px 28px rgba(26, 39, 68, 0.12);
+      transform: translateY(-2px)
+    }
+
+    .pa-card--flyer-preview:focus-within {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px
+    }
+
+    .flyer-preview-btn {
+      margin-top: 8px;
+      width: 100%;
+      background: var(--navy-light);
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .flyer-preview-btn:hover {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy)
+    }
+
+    .flyer-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box
+    }
+
+    .flyer-lightbox.open {
+      display: flex
+    }
+
+    .flyer-lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 39, 68, 0.55);
+      backdrop-filter: blur(8px)
+    }
+
+    .flyer-lightbox-panel {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: min(480px, 94vw)
+    }
+
+    .flyer-lightbox-close {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      transition: background .15s, border-color .15s
+    }
+
+    .flyer-lightbox-close:hover {
+      background: var(--cream);
+      border-color: var(--navy-mid)
+    }
+
+    .flyer-lightbox-hint {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-mid);
+      margin: 0 0 14px
+    }
+
+    .flyer-lightbox-sheet {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      box-shadow: 0 28px 70px rgba(26, 39, 68, 0.28);
+      border: 1px solid var(--border)
+    }
+
+    .flyer-lb-mockup {
+      aspect-ratio: 8.5/11;
+      background: var(--navy);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(20px, 5vw, 40px) clamp(18px, 4vw, 36px);
+      gap: clamp(10px, 2.5vw, 16px);
+      position: relative;
+      min-height: 280px
+    }
+
+    .flyer-lb-name {
+      font-size: clamp(13px, 3.2vw, 17px);
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.95);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.25;
+      padding: 0 12px
+    }
+
+    .flyer-lb-tagline {
+      font-size: clamp(11px, 2.6vw, 14px);
+      color: rgba(255, 255, 255, 0.58);
+      text-align: center;
+      line-height: 1.35;
+      padding: 0 14px
+    }
+
+    .flyer-lb-loc,
+    .flyer-lb-mem {
+      font-size: clamp(10px, 2.2vw, 12px);
+      color: rgba(255, 255, 255, 0.48);
+      text-align: center;
+      line-height: 1.35;
+      padding: 0 14px
+    }
+
+    .flyer-lb-qr {
+      width: clamp(64px, 18vw, 96px);
+      height: clamp(64px, 18vw, 96px);
+      background: #fff;
+      border-radius: 10px;
+      flex-shrink: 0
+    }
+
+    .flyer-lb-band {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--gold);
+      height: clamp(32px, 8vw, 42px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 0 14px 14px
+    }
+
+    .flyer-lb-band span {
+      font-size: clamp(9px, 2vw, 12px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em
+    }
+
+    .confirm-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center
+    }
+
+    .check-circle {
+      width: 62px;
+      height: 62px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 28px;
+      border: 2px solid rgba(45, 122, 95, 0.25)
+    }
+
+    .confirm-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px
+    }
+
+    .confirm-card>p {
+      font-size: 15px;
+      color: var(--text-mid);
+      max-width: 420px;
+      margin: 0 auto 24px;
+      line-height: 1.65
+    }
+
+    .next-steps {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 18px 22px;
+      text-align: left;
+      margin-bottom: 24px
+    }
+
+    .next-steps h4 {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-light);
+      margin-bottom: 12px
+    }
+
+    .ns-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .ns-row:last-child {
+      border: none
+    }
+
+    .ns-dot {
+      width: 22px;
+      height: 22px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0
+    }
+
+    .ns-row p {
+      font-size: 13px;
+      color: var(--text-dark)
+    }
+
+    .confirm-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .confirm-btns .btn-full {
+      width: auto;
+      padding: 12px 24px;
+      margin: 0
+    }
+
+    .sg-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px
+    }
+
+    .btn-back {
+      background: #fff;
+      color: var(--text-mid);
+      border: 1.5px solid var(--border);
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .btn-back:hover {
+      border-color: var(--navy);
+      color: var(--navy)
+    }
+
+    .btn-next {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s
+    }
+
+    .btn-next:hover {
+      background: var(--navy-mid)
+    }
+
+    .btn-next.gold {
+      background: var(--gold)
+    }
+
+    .btn-next.gold:hover {
+      background: var(--gold-dark)
+    }
+
+    .step-hint {
+      font-size: 13px;
+      color: var(--text-light)
+    }
+
+    /* ===== ORDER ===== */
+    .order-wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 32px
+    }
+
+    .page-hdr {
+      margin-bottom: 32px
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 6px
+    }
+
+    .page-hdr h1 {
+      font-family: 'Lora', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 5px
+    }
+
+    .page-hdr p {
+      font-size: 14px;
+      color: var(--text-mid)
+    }
+
+    .prog-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 36px
+    }
+
+    .prog-item {
+      display: flex;
+      align-items: center;
+      gap: 7px
+    }
+
+    .prog-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0
+    }
+
+    .prog-circle.done {
+      background: var(--green);
+      color: #fff
+    }
+
+    .prog-circle.active {
+      background: var(--navy);
+      color: #fff
+    }
+
+    .prog-circle.todo {
+      background: #fff;
+      color: var(--text-light);
+      border: 1.5px solid var(--border)
+    }
+
+    .prog-label {
+      font-size: 12px;
+      font-weight: 500
+    }
+
+    .prog-label.done {
+      color: var(--green)
+    }
+
+    .prog-label.active {
+      color: var(--navy)
+    }
+
+    .prog-label.todo {
+      color: var(--text-light)
+    }
+
+    .prog-line {
+      flex: 1;
+      height: 1.5px;
+      background: var(--border);
+      max-width: 44px;
+      margin: 0 4px
+    }
+
+    .prog-line.done {
+      background: var(--green)
+    }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      align-items: start
+    }
+
+    .sec-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 28px
+    }
+
+    .asset-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all .15s;
+      background: #fff
+    }
+
+    .asset-card:hover {
+      border-color: var(--navy-mid)
+    }
+
+    .asset-card.sel {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(26, 39, 68, 0.1)
+    }
+
+    .a-thumb {
+      aspect-ratio: 3/4;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      gap: 6px;
+      position: relative
+    }
+
+    .a-logo {
+      width: 34px;
+      height: 34px;
+      background: rgba(200, 164, 74, 0.4);
+      border-radius: 8px
+    }
+
+    .a-line1 {
+      width: 78%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 3px
+    }
+
+    .a-line2 {
+      width: 60%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 3px
+    }
+
+    .a-qr {
+      width: 42px;
+      height: 42px;
+      background: #fff;
+      border-radius: 5px;
+      margin-top: 6px
+    }
+
+    .a-band {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--gold);
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .a-band span {
+      font-size: 8px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.3px
+    }
+
+    .a-check {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .asset-card.sel .a-check {
+      display: flex
+    }
+
+    .a-info {
+      padding: 10px 12px
+    }
+
+    .a-info h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 2px
+    }
+
+    .a-info p {
+      font-size: 11px;
+      color: var(--text-light)
+    }
+
+    .qty-options {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 10px 0 28px
+    }
+
+    .qty-btn {
+      border: 1.5px solid var(--border);
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .qty-btn:hover {
+      border-color: var(--navy-mid)
+    }
+
+    .qty-btn.sel {
+      border-color: var(--navy);
+      background: var(--navy-light)
+    }
+
+    .qty-num {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy)
+    }
+
+    .qty-label {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 2px
+    }
+
+    .summary-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      position: sticky;
+      top: 76px
+    }
+
+    .summary-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 18px
+    }
+
+    .sum-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px
+    }
+
+    .sum-row:last-of-type {
+      border: none
+    }
+
+    .sum-row .lbl {
+      color: var(--text-mid)
+    }
+
+    .sum-row .val {
+      font-weight: 500
+    }
+
+    .sum-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0 0
+    }
+
+    .sum-total .lbl {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 15px
+    }
+
+    .sum-total .val {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy)
+    }
+
+    .church-note {
+      background: var(--green-light);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .church-note p {
+      font-size: 12px;
+      color: var(--green-dark);
+      line-height: 1.4
+    }
+
+    .church-note strong {
+      font-weight: 600
+    }
+
+    .delivery {
+      font-size: 12px;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: 10px
+    }
+
+    /* ===== DASHBOARD ===== */
+    .dash-wrapper {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 14px
+    }
+
+    .dash-top .greeting h2 {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy)
+    }
+
+    .dash-top .greeting p {
+      font-size: 13px;
+      color: var(--text-mid);
+      margin-top: 2px
+    }
+
+    .dash-actions {
+      display: flex;
+      gap: 10px
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .15s
+    }
+
+    .btn-sm.outline {
+      background: #fff;
+      color: var(--navy);
+      border: 1.5px solid var(--border)
+    }
+
+    .btn-sm.outline:hover {
+      border-color: var(--navy)
+    }
+
+    .btn-sm.solid {
+      background: var(--navy);
+      color: #fff
+    }
+
+    .btn-sm.solid:hover {
+      background: var(--navy-mid)
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px
+    }
+
+    .metric-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px
+    }
+
+    .metric-card.hl {
+      background: var(--navy)
+    }
+
+    .m-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-light);
+      margin-bottom: 7px
+    }
+
+    .metric-card.hl .m-label {
+      color: rgba(255, 255, 255, 0.45)
+    }
+
+    .m-value {
+      font-family: 'Lora', serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px
+    }
+
+    .metric-card.hl .m-value {
+      color: var(--gold)
+    }
+
+    .m-change {
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 500
+    }
+
+    .metric-card.hl .m-change {
+      color: rgba(255, 255, 255, 0.45)
+    }
+
+    .m-change.neutral {
+      color: var(--text-light)
+    }
+
+    .prog-section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      margin-bottom: 22px
+    }
+
+    .prog-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px
+    }
+
+    .prog-hdr h3 {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy)
+    }
+
+    .prog-hdr span {
+      font-size: 13px;
+      color: var(--text-mid)
+    }
+
+    .prog-track {
+      background: var(--navy-light);
+      border-radius: 100px;
+      height: 11px;
+      overflow: hidden;
+      margin-bottom: 8px
+    }
+
+    .prog-fill {
+      background: linear-gradient(90deg, var(--green), #4BAF88);
+      height: 100%;
+      border-radius: 100px;
+      width: 0;
+      transition: width 1.2s ease
+    }
+
+    .prog-sub {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-light)
+    }
+
+    .share-section {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap
+    }
+
+    .share-text h3 {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 4px
+    }
+
+    .share-text p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5)
+    }
+
+    .share-graphic {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(200, 164, 74, 0.3);
+      border-radius: 12px;
+      padding: 18px 26px;
+      text-align: center
+    }
+
+    .share-num {
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--gold)
+    }
+
+    .share-lbl {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 3px
+    }
+
+    .share-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .btn-share {
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .btn-share.copy {
+      background: var(--gold);
+      color: #fff
+    }
+
+    .btn-share.copy:hover {
+      background: var(--gold-dark)
+    }
+
+    .btn-share.dl {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2)
+    }
+
+    .btn-share.dl:hover {
+      background: rgba(255, 255, 255, 0.18)
+    }
+
+    .dash-cols {
+      display: grid;
+      grid-template-columns: 1fr 290px;
+      gap: 22px;
+      align-items: start
+    }
+
+    .subs-section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px
+    }
+
+    .subs-section h3 {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 14px
+    }
+
+    .subs-table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .subs-table th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--text-light);
+      padding: 0 10px 9px 0;
+      text-align: left;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .subs-table td {
+      font-size: 13px;
+      color: var(--text-dark);
+      padding: 9px 10px 9px 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .subs-table tr:last-child td {
+      border: none
+    }
+
+    .s-status {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500
+    }
+
+    .s-status.active {
+      background: var(--green-light);
+      color: var(--green-dark)
+    }
+
+    .s-status.pending {
+      background: var(--gold-light);
+      color: var(--gold-dark)
+    }
+
+    .timeline-section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px
+    }
+
+    .timeline-section h3 {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 18px
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .tl-item:last-child {
+      border: none
+    }
+
+    .tl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px
+    }
+
+    .tl-dot.done {
+      background: var(--green)
+    }
+
+    .tl-dot.active {
+      background: var(--gold)
+    }
+
+    .tl-dot.pending {
+      background: var(--border)
+    }
+
+    .tl-content h4 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 2px
+    }
+
+    .tl-content p {
+      font-size: 12px;
+      color: var(--text-mid)
+    }
+
+    .tl-badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+      margin-top: 4px
+    }
+
+    .tl-badge.done {
+      background: var(--green-light);
+      color: var(--green-dark)
+    }
+
+    .tl-badge.active {
+      background: var(--gold-light);
+      color: var(--gold-dark)
+    }
+
+    .tl-badge.pending {
+      background: var(--navy-light);
+      color: var(--navy-mid)
+    }
+
+    @media(max-width:900px) {
+      .login-wrapper {
+        grid-template-columns: 1fr
+      }
+
+      .login-visual {
+        display: none
+      }
+
+      .order-grid,
+      .dash-cols {
+        grid-template-columns: 1fr
+      }
+
+      .asset-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .pa-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media(max-width:600px) {
+      .topnav {
+        padding: 0 16px
+      }
+
+      .nav-btn:not(.cta):not(.active) {
+        display: none
+      }
+
+      .hero,
+      .section,
+      .money-section,
+      .testimonial-section {
+        padding: 48px 20px
+      }
+
+      .order-wrapper,
+      .dash-wrapper {
+        padding: 24px 16px
+      }
+
+      .sg-grid {
+        grid-template-columns: 1fr
+      }
+
+      .sg-half-row {
+        width: 100%
+      }
+
+      .size-tiles,
+      .qty-options {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .pa-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .asset-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav class="topnav">
-  <div class="logo">Home<span>Lari</span></div>
-  <div class="nav-links">
-    <button class="nav-btn active" onclick="go('landing')">Home</button>
-    <button class="nav-btn" onclick="go('login')">Sign In</button>
-    <button class="nav-btn" onclick="go('signup')">Enroll Church</button>
-    <button class="nav-btn" onclick="go('order')">Order Assets</button>
-    <button class="nav-btn" onclick="go('dashboard')">Dashboard</button>
-    <button class="nav-btn cta" onclick="go('signup')">Get Started</button>
-  </div>
-</nav>
-
-<!-- ========== LANDING ========== -->
-<div class="page show" id="page-landing">
-  <div class="hero">
-    <div class="hero-badge">🏡 Church Fundraiser Program</div>
-    <h1>Help your church <em>raise more</em><br>while members save more</h1>
-    <p>Members subscribe to Home Lari for $25/year — save up to $800 on home energy — and $15 goes directly to your church.</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="go('signup')">Enroll Your Church</button>
-      <button class="btn-outline" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See How It Works</button>
+  <!-- NAV -->
+  <nav class="topnav">
+    <div class="logo">Home<span>Lari</span></div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="go('landing')">Home</button>
+      <button class="nav-btn" onclick="go('login')">Sign In</button>
+      <button class="nav-btn" onclick="go('signup')">Enroll Church</button>
+      <button class="nav-btn" onclick="go('order')">Order Assets</button>
+      <button class="nav-btn" onclick="go('dashboard')">Dashboard</button>
+      <button class="nav-btn cta" onclick="go('signup')">Get Started</button>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="num">$15</div><div class="lbl">per subscription to church</div></div>
-      <div class="hero-stat"><div class="num">$800</div><div class="lbl">avg. annual member savings</div></div>
-      <div class="hero-stat"><div class="num">$25</div><div class="lbl">annual subscription cost</div></div>
-      <div class="hero-stat"><div class="num">5 days</div><div class="lbl">flyer delivery</div></div>
-    </div>
-  </div>
+  </nav>
 
-  <div class="money-section">
-    <div class="money-inner">
-      <div class="section-label">Clear & Simple Breakdown</div>
-      <div class="section-title" style="color:#fff">Where the money goes</div>
-      <p class="section-sub" style="color:rgba(255,255,255,0.55);margin:0 auto 44px">Every subscription is transparent. Your congregation knows exactly what they contribute — and what they get back.</p>
-      <div class="money-cards">
-        <div class="money-card"><div class="amount sub-amount">$25</div><div class="desc">Annual subscription per member — less than $2.10/month</div></div>
-        <div class="money-card" style="border-color:rgba(200,164,74,0.4);background:rgba(200,164,74,0.08)"><div class="amount church-amount">$15</div><div class="desc">Goes directly to your church's fundraising account</div></div>
-        <div class="money-card"><div class="amount savings-amount">$800</div><div class="desc">Average energy savings per household per year</div></div>
+  <!-- ========== LANDING ========== -->
+  <div class="page show" id="page-landing">
+    <div class="hero">
+      <div class="hero-badge">🏡 Church Fundraiser Program</div>
+      <h1>Help your church <em>raise more</em><br>while members save more</h1>
+      <p>Members subscribe to Home Lari for $25/year — save up to $800 on home energy — and $15 goes directly to your
+        church.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="go('signup')">Enroll Your Church</button>
+        <button class="btn-outline" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See How
+          It Works</button>
       </div>
-    </div>
-  </div>
-
-  <div class="section" id="how">
-    <div class="section-inner">
-      <div class="section-label">The Process</div>
-      <div class="section-title">Up and running in under 10 minutes</div>
-      <p class="section-sub">No design work, no technical setup. We've built everything — you just fill in your church name.</p>
-      <div class="steps-grid">
-        <div class="step-card"><div class="step-num">1</div><h3>Enroll your church</h3><p>Fill in basic info — name, address, pastor name, email list size. Takes less than 5 minutes.</p></div>
-        <div class="step-card"><div class="step-num">2</div><h3>Assets generated instantly</h3><p>Your unique QR code, branded flyers, email copy, and social media posts are ready immediately.</p></div>
-        <div class="step-card"><div class="step-num">3</div><h3>Review & order flyers</h3><p>Preview all materials. Select flyer quantity and submit — delivered within 5 business days.</p></div>
-        <div class="step-card"><div class="step-num">4</div><h3>Announce on Sunday</h3><p>Use the included pastor script. Members scan the QR code and subscribe in under 60 seconds.</p></div>
-        <div class="step-card"><div class="step-num">5</div><h3>Watch funds grow</h3><p>Track real-time subscriptions and total raised. Share progress graphics with your congregation.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="testimonial-section">
-    <div class="testimonial-inner">
-      <div class="section-label" style="margin-bottom:18px">What churches are saying</div>
-      <blockquote>"We raised over $1,800 in our first two Sundays. Our members loved that it saved them money while supporting the church. The flyers arrived beautifully branded — we didn't change a thing."</blockquote>
-      <div class="quote-attr"><strong>Pastor James Whitfield</strong> — Calvary Baptist Church, Atlanta, GA</div>
-      <div style="margin-top:36px"><button class="btn-primary" onclick="go('signup')" style="padding:14px 36px">Enroll Your Church Free</button></div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== LOGIN ========== -->
-<div class="page" id="page-login">
-  <div class="login-wrapper">
-    <div class="login-visual">
-      <div class="login-icon">⛪</div>
-      <h2>Your fundraiser, fully managed</h2>
-      <p>Access your church dashboard, order materials, and track every dollar raised — all in one place.</p>
-      <ul class="login-features">
-        <li>Real-time subscription tracking</li>
-        <li>Branded flyers & social assets ready instantly</li>
-        <li>Pastor scripts & email templates included</li>
-        <li>Shareable progress graphics for Sunday</li>
-        <li>Annual campaign — runs itself</li>
-      </ul>
-    </div>
-    <div class="login-form-wrap">
-      <div class="login-form-box">
-        <h2>Welcome back</h2>
-        <p class="login-sub">Sign in to your church admin account</p>
-        <div class="form-group">
-          <label>Church email address</label>
-          <input type="email" placeholder="pastor@yourchurch.org" />
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">$15</div>
+          <div class="lbl">per subscription to church</div>
         </div>
-        <div class="form-group">
-          <div class="form-hint">
-            <label>Password</label>
-            <a href="#">Forgot password?</a>
+        <div class="hero-stat">
+          <div class="num">$800</div>
+          <div class="lbl">avg. annual member savings</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">$25</div>
+          <div class="lbl">annual subscription cost</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">5 days</div>
+          <div class="lbl">flyer delivery</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="money-section">
+      <div class="money-inner">
+        <div class="section-label">Clear & Simple Breakdown</div>
+        <div class="section-title" style="color:#fff">Where the money goes</div>
+        <p class="section-sub" style="color:rgba(255,255,255,0.55);margin:0 auto 44px">Every subscription is
+          transparent. Your congregation knows exactly what they contribute — and what they get back.</p>
+        <div class="money-cards">
+          <div class="money-card">
+            <div class="amount sub-amount">$25</div>
+            <div class="desc">Annual subscription per member — less than $2.10/month</div>
           </div>
-          <input type="password" placeholder="••••••••" />
+          <div class="money-card" style="border-color:rgba(200,164,74,0.4);background:rgba(200,164,74,0.08)">
+            <div class="amount church-amount">$15</div>
+            <div class="desc">Goes directly to your church's fundraising account</div>
+          </div>
+          <div class="money-card">
+            <div class="amount savings-amount">$800</div>
+            <div class="desc">Average energy savings per household per year</div>
+          </div>
         </div>
-        <button class="btn-full" onclick="go('dashboard')">Sign In to Dashboard</button>
-        <div class="divider">or</div>
-        <button class="btn-google">
-          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-          Continue with Google
-        </button>
-        <div class="signup-link">Don't have an account? <a href="#" onclick="go('signup')">Enroll your church →</a></div>
+      </div>
+    </div>
+
+    <div class="section" id="how">
+      <div class="section-inner">
+        <div class="section-label">The Process</div>
+        <div class="section-title">Up and running in under 10 minutes</div>
+        <p class="section-sub">No design work, no technical setup. We've built everything — you just fill in your church
+          name.</p>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Enroll your church</h3>
+            <p>Fill in basic info — name, address, pastor name, email list size. Takes less than 5 minutes.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>Assets generated instantly</h3>
+            <p>Your unique QR code, branded flyers, email copy, and social media posts are ready immediately.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>Review & order flyers</h3>
+            <p>Preview all materials. Select flyer quantity and submit — delivered within 5 business days.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <h3>Announce on Sunday</h3>
+            <p>Use the included pastor script. Members scan the QR code and subscribe in under 60 seconds.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <h3>Watch funds grow</h3>
+            <p>Track real-time subscriptions and total raised. Share progress graphics with your congregation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-section">
+      <div class="testimonial-inner">
+        <div class="section-label" style="margin-bottom:18px">What churches are saying</div>
+        <blockquote>"We raised over $1,800 in our first two Sundays. Our members loved that it saved them money while
+          supporting the church. The flyers arrived beautifully branded — we didn't change a thing."</blockquote>
+        <div class="quote-attr"><strong>Pastor James Whitfield</strong> — Calvary Baptist Church, Atlanta, GA</div>
+        <div style="margin-top:36px"><button class="btn-primary" onclick="go('signup')" style="padding:14px 36px">Enroll
+            Your Church Free</button></div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ========== SIGNUP ========== -->
-<div class="page" id="page-signup">
-  <div class="signup-outer">
-    <div class="signup-shell">
-      <div class="signup-header">
-        <div class="step-pill">⛪ Church Enrollment — Free</div>
-        <h1>Enroll Your Church</h1>
-        <p>Get set up in under 10 minutes. No design work required.</p>
+  <!-- ========== LOGIN ========== -->
+  <div class="page" id="page-login">
+    <div class="login-wrapper">
+      <div class="login-visual">
+        <div class="login-icon">⛪</div>
+        <h2>Your fundraiser, fully managed</h2>
+        <p>Access your church dashboard, order materials, and track every dollar raised — all in one place.</p>
+        <ul class="login-features">
+          <li>Real-time subscription tracking</li>
+          <li>Branded flyers & social assets ready instantly</li>
+          <li>Pastor scripts & email templates included</li>
+          <li>Shareable progress graphics for Sunday</li>
+          <li>Annual campaign — runs itself</li>
+        </ul>
       </div>
-      <div class="sg-steps">
-        <div class="ss-item"><div class="ss-circle cur" id="sc1">1</div><span class="ss-label cur" id="sl1">Church Info</span></div>
-        <div class="ss-line" id="sline1"></div>
-        <div class="ss-item"><div class="ss-circle todo" id="sc2">2</div><span class="ss-label todo" id="sl2">Branding</span></div>
-        <div class="ss-line" id="sline2"></div>
-        <div class="ss-item"><div class="ss-circle todo" id="sc3">3</div><span class="ss-label todo" id="sl3">Preview</span></div>
-        <div class="ss-line" id="sline3"></div>
-        <div class="ss-item"><div class="ss-circle todo" id="sc4">4</div><span class="ss-label todo" id="sl4">Confirm</span></div>
+      <div class="login-form-wrap">
+        <div class="login-form-box">
+          <h2>Welcome back</h2>
+          <p class="login-sub">Sign in to your church admin account</p>
+          <div class="form-group">
+            <label>Church email address</label>
+            <input type="email" placeholder="pastor@yourchurch.org" />
+          </div>
+          <div class="form-group">
+            <div class="form-hint">
+              <label>Password</label>
+              <a href="#">Forgot password?</a>
+            </div>
+            <input type="password" placeholder="••••••••" />
+          </div>
+          <button class="btn-full" onclick="go('dashboard')">Sign In to Dashboard</button>
+          <div class="divider">or</div>
+          <button class="btn-google">
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+              <path fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+              <path fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+              <path fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+            </svg>
+            Continue with Google
+          </button>
+          <div class="signup-link">Don't have an account? <a href="#" onclick="go('signup')">Enroll your church →</a>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Step 1 -->
-      <div class="sg-panel show" id="sp1">
-        <div class="sg-card">
-          <h2>Tell us about your church</h2>
-          <p class="card-sub">This information personalizes your fundraising page and all marketing materials.</p>
-          <div class="sg-grid">
-            <div class="sg-full"><label class="sg-label">Church Name <span class="req">*</span></label><input class="sg-input" id="sg-church-name" type="text" placeholder="e.g. Grace Community Church" /></div>
-            <div><label class="sg-label">Admin's First Name <span class="req">*</span></label><input class="sg-input" id="sg-admin-first" type="text" placeholder="e.g. James" /></div>
-            <div><label class="sg-label">Admin's Last Name <span class="req">*</span></label><input class="sg-input" id="sg-admin-last" type="text" placeholder="e.g. Whitfield" /></div>
-            <div class="sg-full"><label class="sg-label">Church Street Address <span class="req">*</span></label><input class="sg-input" id="sg-street" type="text" placeholder="123 Faith Avenue" /></div>
-            <div><label class="sg-label">City <span class="req">*</span></label><input class="sg-input" id="sg-city" type="text" placeholder="Atlanta" /></div>
-            <div>
-              <label class="sg-label">State<span class="req">*</span></label>
-              <select class="sg-select" id="sg-state" required>
-                <option value="">Select state…</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-            <div class="sg-half-row">
-              <label class="sg-label">ZIP Code<span class="req">*</span></label>
-              <input class="sg-input" id="sg-zip" type="text" inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="30301" />
-            </div>
-            <div>
-              <label class="sg-label">Congregation size <span class="req">*</span></label>
-              <input class="sg-input" id="sg-congregation-size" type="number" min="1" step="1" inputmode="numeric" placeholder="Approx. active members" />
-            </div>
-            <div><label class="sg-label">Email List Size</label><select class="sg-select"><option value="">Approximate size…</option><option>Under 100</option><option>100 – 300</option><option>300 – 600</option><option>600 – 1,000</option><option>1,000+</option></select></div>
-            <div class="sg-full"><label class="sg-label">Church Contact Email <span class="req">*</span></label><input class="sg-input" id="sg-contact-email" type="email" placeholder="office@yourchurch.org" /></div>
-            <div class="sg-full">
-              <label class="sg-label">Phone Number</label>
-              <input
-                class="sg-input"
-                id="sg-phone"
-                type="tel"
-                placeholder="(503) 848-0589"
-                maxlength="14"
-                inputmode="tel"
-                pattern="\(\d{3}\) \d{3}-\d{4}"
-                oninput="let x = this.value.replace(/\D/g, '').slice(0,10);
+  <!-- ========== SIGNUP ========== -->
+  <div class="page" id="page-signup">
+    <div class="signup-outer">
+      <div class="signup-shell">
+        <div class="signup-header">
+          <div class="step-pill">⛪ Church Enrollment — Free</div>
+          <h1>Enroll Your Church</h1>
+          <p>Get set up in under 10 minutes. No design work required.</p>
+        </div>
+        <div class="sg-steps">
+          <div class="ss-item">
+            <div class="ss-circle cur" id="sc1">1</div><span class="ss-label cur" id="sl1">Church Info</span>
+          </div>
+          <div class="ss-line" id="sline1"></div>
+          <div class="ss-item">
+            <div class="ss-circle todo" id="sc2">2</div><span class="ss-label todo" id="sl2">Branding</span>
+          </div>
+          <div class="ss-line" id="sline2"></div>
+          <div class="ss-item">
+            <div class="ss-circle todo" id="sc3">3</div><span class="ss-label todo" id="sl3">Preview</span>
+          </div>
+          <div class="ss-line" id="sline3"></div>
+          <div class="ss-item">
+            <div class="ss-circle todo" id="sc4">4</div><span class="ss-label todo" id="sl4">Confirm</span>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="sg-panel show" id="sp1">
+          <div class="sg-card">
+            <h2>Tell us about your church</h2>
+            <p class="card-sub">This information personalizes your fundraising page and all marketing materials.</p>
+            <div class="sg-grid">
+              <div class="sg-full"><label class="sg-label">Church Name <span class="req">*</span></label><input
+                  class="sg-input" id="sg-church-name" type="text" placeholder="e.g. Grace Community Church" /></div>
+              <div><label class="sg-label">Admin's First Name <span class="req">*</span></label><input class="sg-input"
+                  id="sg-admin-first" type="text" placeholder="e.g. James" /></div>
+              <div><label class="sg-label">Admin's Last Name <span class="req">*</span></label><input class="sg-input"
+                  id="sg-admin-last" type="text" placeholder="e.g. Whitfield" /></div>
+              <div class="sg-full"><label class="sg-label">Church Street Address <span
+                    class="req">*</span></label><input class="sg-input" id="sg-street" type="text"
+                  placeholder="123 Faith Avenue" /></div>
+              <div><label class="sg-label">City <span class="req">*</span></label><input class="sg-input" id="sg-city"
+                  type="text" placeholder="Atlanta" /></div>
+              <div>
+                <label class="sg-label">State<span class="req">*</span></label>
+                <select class="sg-select" id="sg-state" required>
+                  <option value="">Select state…</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+              </div>
+              <div class="sg-half-row">
+                <label class="sg-label">ZIP Code<span class="req">*</span></label>
+                <input class="sg-input" id="sg-zip" type="text" inputmode="numeric" pattern="\d{5}" maxlength="5"
+                  placeholder="30301" />
+              </div>
+              <div>
+                <label class="sg-label">Congregation size <span class="req">*</span></label>
+                <input class="sg-input" id="sg-congregation-size" type="number" min="1" step="1" inputmode="numeric"
+                  placeholder="Approx. active members" />
+              </div>
+              <div><label class="sg-label">Email List Size</label><select class="sg-select">
+                  <option value="">Approximate size…</option>
+                  <option>Under 100</option>
+                  <option>100 – 300</option>
+                  <option>300 – 600</option>
+                  <option>600 – 1,000</option>
+                  <option>1,000+</option>
+                </select></div>
+              <div class="sg-full"><label class="sg-label">Church Contact Email <span class="req">*</span></label><input
+                  class="sg-input" id="sg-contact-email" type="email" placeholder="office@yourchurch.org" /></div>
+              <div class="sg-full">
+                <label class="sg-label">Phone Number</label>
+                <input class="sg-input" id="sg-phone" type="tel" placeholder="(503) 848-0589" maxlength="14"
+                  inputmode="tel" pattern="\(\d{3}\) \d{3}-\d{4}" oninput="let x = this.value.replace(/\D/g, '').slice(0,10);
                   let formatted = x;
                   if(x.length > 6) {
                     formatted = '(' + x.slice(0,3) + ') ' + x.slice(3,6) + '-' + x.slice(6,10);
@@ -603,714 +2525,958 @@ blockquote{font-family:'Lora',serif;font-size:clamp(17px,2.5vw,22px);font-style:
                   } else if(x.length > 0) {
                     formatted = '(' + x;
                   }
-                  this.value = formatted;"
-              />
-            </div>
-    
-   
-   
-          </div>
-        </div>
-        <div class="sg-nav"><span class="step-hint">Step 1 of 4</span><button class="btn-next" onclick="sgNext(2)">Continue →</button></div>
-      </div>
+                  this.value = formatted;" />
+              </div>
 
-      <!-- Step 2 -->
-      <div class="sg-panel" id="sp2">
-        <div class="sg-card">
-          <h2>Branding & identity</h2>
-          <p class="card-sub">We found a logo in your church profile. Confirm if this is the one you want us to use.</p>
-          <div class="info-box"><span>💡</span><p>If this logo is outdated, choose "No" and upload a new file. We will use your confirmed logo across all materials.</p></div>
-          <div class="sg-grid">
-            <div class="sg-full">
-              <label class="sg-label">Church Logo</label>
-              <div style="display:flex;align-items:center;justify-content:center;background:#fbfaf7;border:1.5px solid var(--border);border-radius:12px;padding:20px">
-                <div id="sg-logo-preview" style="width:130px;height:130px;border-radius:12px;background:#1A2744;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Lora',serif;font-size:16px;font-weight:600;text-align:center;padding:10px">GC</div>
-              </div>
-              <label class="sg-label" style="margin-top:16px">Is this your logo?</label>
-              <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <button type="button" class="btn-back" onclick="toggleLogoUpload(false)" style="padding:10px 16px">Yes, use this logo</button>
-                <button type="button" class="btn-back" onclick="toggleLogoUpload(true)" style="padding:10px 16px">No, upload a new logo</button>
-              </div>
-              <div class="upload-zone" id="new-logo-upload" onclick="simulateUpload()" style="display:none;margin-top:14px">
-                <div style="font-size:28px;margin-bottom:8px">⬆️</div>
-                <h4>Drop your new logo here</h4>
-                <p>PNG, JPG, or SVG · Max 5MB · <span style="color:var(--gold-dark);font-weight:500;cursor:pointer">Browse files</span></p>
-              </div>
-              <div class="upload-ok" id="upload-ok" style="margin-top:12px">
-                <div class="upload-ok-icon">🖼</div>
-                <div><p>new-church-logo.png</p><span>2.4 MB · Uploaded successfully</span></div>
-              </div>
+
+
             </div>
-            <div class="sg-full">
-              <label class="sg-label">Congregation size on file</label>
-              <div style="border:1.5px solid var(--border);border-radius:12px;background:#fbfaf7;padding:14px 16px">
-                <p style="font-size:13px;color:var(--text-mid);margin-bottom:8px">We currently have <strong style="color:var(--navy)" id="congregation-size-on-file">your congregation size on file</strong> for your church.</p>
-                <label class="sg-label" style="margin-bottom:10px">Is this congregation size correct?</label>
+          </div>
+          <div class="sg-nav"><span class="step-hint">Step 1 of 4</span><button class="btn-next"
+              onclick="sgNext(2)">Continue →</button></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="sg-panel" id="sp2">
+          <div class="sg-card">
+            <h2>Your Branding & identity</h2>
+            <p class="card-sub">We found a logo in your church profile. Confirm if this is the one you want us to use.
+            </p>
+            <div class="info-box"><span>💡</span>
+              <p>If this logo is outdated, choose "No" and upload a new file. We will use your confirmed logo across all
+                materials.</p>
+            </div>
+            <div class="sg-grid">
+              <div class="sg-full">
+                <label class="sg-label">Church Logo</label>
+                <div
+                  style="display:flex;align-items:center;justify-content:center;background:#fbfaf7;border:1.5px solid var(--border);border-radius:12px;padding:20px">
+                  <div id="sg-logo-preview"
+                    style="width:130px;height:130px;border-radius:12px;background:#1A2744;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Lora',serif;font-size:16px;font-weight:600;text-align:center;padding:10px">
+                    GC</div>
+                </div>
+                <label class="sg-label" style="margin-top:16px">Is this your logo?</label>
                 <div style="display:flex;gap:10px;flex-wrap:wrap">
-                  <button type="button" class="btn-back" onclick="toggleCongregationInput(false)" style="padding:10px 16px">Yes, this is correct</button>
-                  <button type="button" class="btn-back" onclick="toggleCongregationInput(true)" style="padding:10px 16px">No, update it</button>
+                  <button type="button" class="btn-back" onclick="toggleLogoUpload(false)"
+                    style="padding:10px 16px">Yes, use this logo</button>
+                  <button type="button" class="btn-back" onclick="toggleLogoUpload(true)" style="padding:10px 16px">No,
+                    upload a new logo</button>
                 </div>
-                <div id="congregation-correct-wrap" style="display:none;margin-top:12px">
-                  <label class="sg-label">Enter the correct congregation size</label>
-                  <input class="sg-input" id="sg-congregation-correct" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 420" />
+                <div class="upload-zone" id="new-logo-upload" onclick="simulateUpload()"
+                  style="display:none;margin-top:14px">
+                  <div style="font-size:28px;margin-bottom:8px">⬆️</div>
+                  <h4>Drop your new logo here</h4>
+                  <p>PNG, JPG, or SVG · Max 5MB · <span
+                      style="color:var(--gold-dark);font-weight:500;cursor:pointer">Browse files</span></p>
                 </div>
-              </div>
-            </div>
-            <div class="sg-full"><label class="sg-label">Anything else we should know?</label><textarea class="sg-textarea" id="sg-brand-notes" placeholder="e.g. We'd prefer a more traditional look, or our colors are blue and white…"></textarea></div>
-          </div>
-        </div>
-        <div class="sg-nav"><button class="btn-back" onclick="sgBack(1)">← Back</button><span class="step-hint">Step 2 of 4</span><button class="btn-next" onclick="sgNext(3)">Generate My Assets →</button></div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="sg-panel" id="sp3">
-        <div class="sg-card">
-          <h2>Your materials are ready</h2>
-          <p class="card-sub">Everything below has been automatically branded for <strong id="preview-church-name">your church</strong>. Review and approve to continue.</p>
-          <div style="margin-bottom:22px">
-            <div class="sec-title" style="margin-bottom:14px"><span>📄</span> Generated marketing assets</div>
-            <div class="pa-grid">
-              <div class="pa-card pa-card--flyer-preview" onclick="openFlyerPreview()">
-                <div class="pa-thumb">
-                  <div id="pa-flyer-logo"></div>
-                  <div style="font-size:8px;font-weight:700;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.5px;text-align:center;line-height:1.2;padding:0 6px" id="pa-name1">Grace Community</div>
-                  <div style="font-size:7px;color:rgba(255,255,255,0.5);text-align:center;padding:0 8px;line-height:1.3" id="pa-flyer-tagline">Save on Energy · Support Your Church</div>
-                  <div style="font-size:6px;color:rgba(255,255,255,0.45);text-align:center;padding:0 8px;line-height:1.3" id="pa-flyer-location"></div>
-                  <div style="font-size:6px;color:rgba(255,255,255,0.45);text-align:center" id="pa-flyer-members"></div>
-                  <div class="pa-qr"></div>
-                  <div class="pa-gold"><span>$25/YR · $15 TO YOUR CHURCH</span></div>
-                </div>
-                <div class="pa-info">
-                  <h4>Print Flyer (8.5×11)</h4>
-                  <p id="pa-flyer-caption">QR code · front & back</p>
-                  <button type="button" class="flyer-preview-btn" onclick="event.stopPropagation();openFlyerPreview();">Preview enlarged</button>
-                </div>
-              </div>
-              <div class="pa-card">
-                <div class="pa-thumb" style="background:#2E3F6B">
-                  <div style="width:50px;height:68px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
-                    <div style="font-size:8px;color:rgba(255,255,255,0.7);font-weight:600;text-align:center;line-height:1.15" id="pa-name2">GCC</div>
-                    <div id="pa-table-logo"></div>
-                    <div style="font-size:7px;color:var(--gold)">Scan to subscribe</div>
+                <div class="upload-ok" id="upload-ok" style="margin-top:12px">
+                  <div class="upload-ok-icon">🖼</div>
+                  <div>
+                    <p>new-church-logo.png</p><span>2.4 MB · Uploaded successfully</span>
                   </div>
                 </div>
-                <div class="pa-info"><h4>Table Card (4×6)</h4><p id="pa-table-caption">Lobby & welcome table</p></div>
               </div>
-              <div class="pa-card">
-                <div class="pa-thumb" style="background:linear-gradient(135deg,#1a2744,#2d5a7b)">
-                  <div style="font-size:8px;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:4px;line-height:1.2;padding:0 6px" id="pa-name3">Grace Community</div>
-                  <div style="font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--gold);line-height:1.1;text-align:center" id="pa-social-highlight">350</div>
-                  <div style="font-size:8px;color:rgba(255,255,255,0.45);text-align:center" id="pa-social-sub">members · your community</div>
-                  <div id="pa-social-logo" style="margin-top:8px"></div>
+              <div class="sg-full">
+                <label class="sg-label">Congregation size on file</label>
+                <div style="border:1.5px solid var(--border);border-radius:12px;background:#fbfaf7;padding:14px 16px">
+                  <p style="font-size:13px;color:var(--text-mid);margin-bottom:8px">We currently have <strong
+                      style="color:var(--navy)" id="congregation-size-on-file">your congregation size on file</strong>
+                    for your church.</p>
+                  <label class="sg-label" style="margin-bottom:10px">Is this congregation size correct?</label>
+                  <div style="display:flex;gap:10px;flex-wrap:wrap">
+                    <button type="button" class="btn-back" onclick="toggleCongregationInput(false)"
+                      style="padding:10px 16px">Yes, this is correct</button>
+                    <button type="button" class="btn-back" onclick="toggleCongregationInput(true)"
+                      style="padding:10px 16px">No, update it</button>
+                  </div>
+                  <div id="congregation-correct-wrap" style="display:none;margin-top:12px">
+                    <label class="sg-label">Enter the correct congregation size</label>
+                    <input class="sg-input" id="sg-congregation-correct" type="number" min="1" step="1"
+                      inputmode="numeric" placeholder="e.g. 420" />
+                  </div>
                 </div>
-                <div class="pa-info"><h4>Social Post</h4><p id="pa-social-caption">Instagram & Facebook</p></div>
               </div>
-              <div class="pa-card">
-                <div class="pa-thumb" style="background:#f9f7f3;padding:12px;justify-content:flex-start;gap:4px">
-                  <div style="width:100%;height:10px;background:var(--navy);border-radius:3px 3px 0 0;margin-bottom:4px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:600;color:#fff;letter-spacing:0.3px" id="pa-email-header">Your church</div>
-                  <div style="font-size:7px;color:var(--text-mid);padding:4px 2px 2px;line-height:1.35;text-align:left" id="pa-email-blurb">Your personalized email…</div>
-                  <div style="width:90%;height:4px;background:#ccc;border-radius:2px"></div>
-                  <div style="width:75%;height:4px;background:#ddd;border-radius:2px"></div>
-                  <div style="width:48px;height:13px;background:var(--gold);border-radius:4px;margin-top:8px"></div>
-                </div>
-                <div class="pa-info"><h4>Email Template</h4><p id="pa-email-caption">Copy-paste ready</p></div>
-              </div>
-              <div class="pa-card">
-                <div class="pa-thumb" style="background:#f4f0ea;padding:10px 12px;justify-content:flex-start;gap:6px;align-items:stretch">
-                  <div style="font-size:7px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.4px" id="pa-pastor-title">Sunday announcement</div>
-                  <div style="font-size:7px;color:var(--text-mid);line-height:1.4;text-align:left;flex:1" id="pa-pastor-blurb">Your script preview…</div>
-                </div>
-                <div class="pa-info"><h4>Pastor Script</h4><p id="pa-pastor-caption">2-min Sunday announcement</p></div>
-              </div>
-              <div class="pa-card">
-                <div class="pa-thumb" style="background:#fff;gap:6px">
-                  <div style="width:62px;height:62px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center" id="pa-qr-logo-wrap"><div id="pa-qr-logo"></div></div>
-                  <div style="font-size:8px;color:var(--text-mid);text-align:center;line-height:1.2;padding:0 4px" id="pa-name4">Grace Community</div>
-                  <div style="font-size:7px;color:var(--text-light);text-align:center" id="pa-qr-url">homelari.com/your-church</div>
-                </div>
-                <div class="pa-info"><h4>Unique QR Code</h4><p id="pa-qr-caption">Tracks your church's signups</p></div>
+              <div class="sg-full"><label class="sg-label">Anything else we should know?</label><textarea
+                  class="sg-textarea" id="sg-brand-notes"
+                  placeholder="e.g. We'd prefer a more traditional look, or our colors are blue and white…"></textarea>
               </div>
             </div>
           </div>
-          <div style="background:var(--green-light);border:1px solid rgba(45,122,95,0.2);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px">
-            <span style="font-size:20px">✅</span>
-            <div><p style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:2px">All assets look good? You can edit anytime from your dashboard.</p><p style="font-size:12px;color:var(--text-mid)">Flyers will be printed and shipped after you confirm your order quantity.</p></div>
-          </div>
+          <div class="sg-nav"><button class="btn-back" onclick="sgBack(1)">← Back</button><span class="step-hint">Step 2
+              of 4</span><button class="btn-next" onclick="sgNext(3)">Generate My Assets →</button></div>
         </div>
-        <div class="sg-nav"><button class="btn-back" onclick="sgBack(2)">← Back</button><span class="step-hint">Step 3 of 4</span><button class="btn-next gold" onclick="sgNext(4)">Approve & Continue →</button></div>
-      </div>
 
-      <!-- Step 4 -->
-      <div class="sg-panel" id="sp4">
-        <div class="confirm-card">
-          <div class="check-circle">🎉</div>
-          <h2>You're enrolled!</h2>
-          <p>Welcome to Home Lari, <strong id="confirm-name">Grace Community Church</strong>. Your fundraiser page, QR code, and all marketing assets are ready. Your first flyer shipment arrives within 5 business days.</p>
-          <div class="next-steps">
-            <h4>What happens next</h4>
-            <div class="ns-row"><div class="ns-dot">1</div><p>Check your email for login credentials and your dashboard link</p></div>
-            <div class="ns-row"><div class="ns-dot">2</div><p>Review and order your flyers from the Asset Order page</p></div>
-            <div class="ns-row"><div class="ns-dot">3</div><p>Announce the fundraiser this Sunday using your pastor script</p></div>
-            <div class="ns-row"><div class="ns-dot">4</div><p>Watch subscriptions and donations roll in on your real-time dashboard</p></div>
+        <!-- Step 3 -->
+        <div class="sg-panel" id="sp3">
+          <div class="sg-card">
+            <h2>Your materials are ready</h2>
+            <p class="card-sub">Everything below has been automatically branded for <strong
+                id="preview-church-name">your church</strong>. Review and approve to continue.</p>
+            <div style="margin-bottom:22px">
+              <div class="sec-title" style="margin-bottom:14px"><span>📄</span> Generated marketing assets</div>
+              <div class="pa-grid">
+                <div class="pa-card pa-card--flyer-preview" onclick="openFlyerPreview()">
+                  <div class="pa-thumb">
+                    <div id="pa-flyer-logo"></div>
+                    <div
+                      style="font-size:8px;font-weight:700;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.5px;text-align:center;line-height:1.2;padding:0 6px"
+                      id="pa-name1">Grace Community</div>
+                    <div
+                      style="font-size:7px;color:rgba(255,255,255,0.5);text-align:center;padding:0 8px;line-height:1.3"
+                      id="pa-flyer-tagline">Save on Energy · Support Your Church</div>
+                    <div
+                      style="font-size:6px;color:rgba(255,255,255,0.45);text-align:center;padding:0 8px;line-height:1.3"
+                      id="pa-flyer-location"></div>
+                    <div style="font-size:6px;color:rgba(255,255,255,0.45);text-align:center" id="pa-flyer-members">
+                    </div>
+                    <div class="pa-qr"></div>
+                    <div class="pa-gold"><span>$25/YR · $15 TO YOUR CHURCH</span></div>
+                  </div>
+                  <div class="pa-info">
+                    <h4>Print Flyer (8.5×11)</h4>
+                    <p id="pa-flyer-caption">QR code · front & back</p>
+                    <button type="button" class="flyer-preview-btn"
+                      onclick="event.stopPropagation();openFlyerPreview();">Preview enlarged</button>
+                  </div>
+                </div>
+                <div class="pa-card">
+                  <div class="pa-thumb" style="background:#2E3F6B">
+                    <div
+                      style="width:50px;height:68px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
+                      <div
+                        style="font-size:8px;color:rgba(255,255,255,0.7);font-weight:600;text-align:center;line-height:1.15"
+                        id="pa-name2">GCC</div>
+                      <div id="pa-table-logo"></div>
+                      <div style="font-size:7px;color:var(--gold)">Scan to subscribe</div>
+                    </div>
+                  </div>
+                  <div class="pa-info">
+                    <h4>Table Card (4×6)</h4>
+                    <p id="pa-table-caption">Lobby & welcome table</p>
+                  </div>
+                </div>
+                <div class="pa-card">
+                  <div class="pa-thumb" style="background:linear-gradient(135deg,#1a2744,#2d5a7b)">
+                    <div
+                      style="font-size:8px;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:4px;line-height:1.2;padding:0 6px"
+                      id="pa-name3">Grace Community</div>
+                    <div
+                      style="font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--gold);line-height:1.1;text-align:center"
+                      id="pa-social-highlight">350</div>
+                    <div style="font-size:8px;color:rgba(255,255,255,0.45);text-align:center" id="pa-social-sub">members
+                      · your community</div>
+                    <div id="pa-social-logo" style="margin-top:8px"></div>
+                  </div>
+                  <div class="pa-info">
+                    <h4>Social Post</h4>
+                    <p id="pa-social-caption">Instagram & Facebook</p>
+                  </div>
+                </div>
+                <div class="pa-card">
+                  <div class="pa-thumb" style="background:#f9f7f3;padding:12px;justify-content:flex-start;gap:4px">
+                    <div
+                      style="width:100%;height:10px;background:var(--navy);border-radius:3px 3px 0 0;margin-bottom:4px;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:600;color:#fff;letter-spacing:0.3px"
+                      id="pa-email-header">Your church</div>
+                    <div
+                      style="font-size:7px;color:var(--text-mid);padding:4px 2px 2px;line-height:1.35;text-align:left"
+                      id="pa-email-blurb">Your personalized email…</div>
+                    <div style="width:90%;height:4px;background:#ccc;border-radius:2px"></div>
+                    <div style="width:75%;height:4px;background:#ddd;border-radius:2px"></div>
+                    <div style="width:48px;height:13px;background:var(--gold);border-radius:4px;margin-top:8px"></div>
+                  </div>
+                  <div class="pa-info">
+                    <h4>Email Template</h4>
+                    <p id="pa-email-caption">Copy-paste ready</p>
+                  </div>
+                </div>
+                <div class="pa-card">
+                  <div class="pa-thumb"
+                    style="background:#f4f0ea;padding:10px 12px;justify-content:flex-start;gap:6px;align-items:stretch">
+                    <div
+                      style="font-size:7px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.4px"
+                      id="pa-pastor-title">Sunday announcement</div>
+                    <div style="font-size:7px;color:var(--text-mid);line-height:1.4;text-align:left;flex:1"
+                      id="pa-pastor-blurb">Your script preview…</div>
+                  </div>
+                  <div class="pa-info">
+                    <h4>Pastor Script</h4>
+                    <p id="pa-pastor-caption">2-min Sunday announcement</p>
+                  </div>
+                </div>
+                <div class="pa-card">
+                  <div class="pa-thumb" style="background:#fff;gap:6px">
+                    <div
+                      style="width:62px;height:62px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center"
+                      id="pa-qr-logo-wrap">
+                      <div id="pa-qr-logo"></div>
+                    </div>
+                    <div style="font-size:8px;color:var(--text-mid);text-align:center;line-height:1.2;padding:0 4px"
+                      id="pa-name4">Grace Community</div>
+                    <div style="font-size:7px;color:var(--text-light);text-align:center" id="pa-qr-url">
+                      homelari.com/your-church</div>
+                  </div>
+                  <div class="pa-info">
+                    <h4>Unique QR Code</h4>
+                    <p id="pa-qr-caption">Tracks your church's signups</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="background:var(--green-light);border:1px solid rgba(45,122,95,0.2);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px">
+              <span style="font-size:20px">✅</span>
+              <div>
+                <p style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:2px">All assets look
+                  good? You can edit anytime from your dashboard.</p>
+                <p style="font-size:12px;color:var(--text-mid)">Flyers will be printed and shipped after you confirm
+                  your order quantity.</p>
+              </div>
+            </div>
           </div>
-          <div class="confirm-btns">
-            <button class="btn-full" onclick="go('dashboard')" style="width:auto;padding:12px 24px;margin:0">Go to My Dashboard →</button>
-            <button class="btn-full gold-btn" onclick="go('order')" style="width:auto;padding:12px 24px;margin:0">Order Flyers Now</button>
+          <div class="sg-nav"><button class="btn-back" onclick="sgBack(2)">← Back</button><span class="step-hint">Step 3
+              of 4</span><button class="btn-next gold" onclick="sgNext(4)">Approve & Continue →</button></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="sg-panel" id="sp4">
+          <div class="confirm-card">
+            <div class="check-circle">🎉</div>
+            <h2>You're enrolled!</h2>
+            <p>Welcome to Home Lari, <strong id="confirm-name">Grace Community Church</strong>. Your fundraiser page, QR
+              code, and all marketing assets are ready. Your first flyer shipment arrives within 5 business days.</p>
+            <div class="next-steps">
+              <h4>What happens next</h4>
+              <div class="ns-row">
+                <div class="ns-dot">1</div>
+                <p>Check your email for login credentials and your dashboard link</p>
+              </div>
+              <div class="ns-row">
+                <div class="ns-dot">2</div>
+                <p>Review and order your flyers from the Asset Order page</p>
+              </div>
+              <div class="ns-row">
+                <div class="ns-dot">3</div>
+                <p>Announce the fundraiser this Sunday using your pastor script</p>
+              </div>
+              <div class="ns-row">
+                <div class="ns-dot">4</div>
+                <p>Watch subscriptions and donations roll in on your real-time dashboard</p>
+              </div>
+            </div>
+            <div class="confirm-btns">
+              <button class="btn-full" onclick="go('dashboard')" style="width:auto;padding:12px 24px;margin:0">Go to My
+                Dashboard →</button>
+              <button class="btn-full gold-btn" onclick="go('order')"
+                style="width:auto;padding:12px 24px;margin:0">Order Flyers Now</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ========== ORDER ========== -->
-<div class="page" id="page-order">
-  <div class="order-wrapper">
-    <div class="page-hdr">
-      <div class="breadcrumb">Dashboard › Order Assets</div>
-      <h1>Marketing Asset Order</h1>
-      <p>Preview, customize, and order your branded fundraising materials for Grace Community Church.</p>
-    </div>
-    <div class="prog-bar">
-      <div class="prog-item"><div class="prog-circle done">✓</div><span class="prog-label done">Church Setup</span></div>
-      <div class="prog-line done"></div>
-      <div class="prog-item"><div class="prog-circle active">2</div><span class="prog-label active">Review Assets</span></div>
-      <div class="prog-line"></div>
-      <div class="prog-item"><div class="prog-circle todo">3</div><span class="prog-label todo">Select Quantity</span></div>
-      <div class="prog-line"></div>
-      <div class="prog-item"><div class="prog-circle todo">4</div><span class="prog-label todo">Submit Order</span></div>
-    </div>
-    <div class="order-grid">
-      <div>
-        <div class="sec-title"><span>📄</span> Select assets to include</div>
-        <div class="asset-grid">
-          <div class="asset-card sel" onclick="toggleAsset(this)">
-            <div class="a-thumb">
-              <div class="a-logo"></div><div class="a-line1"></div>
-              <div style="font-size:8px;color:rgba(255,255,255,0.5);text-align:center;padding:0 8px">"Save on Energy. Support Your Church."</div>
-              <div class="a-qr"></div>
-              <div class="a-band"><span>$25/YR · $15 TO CHURCH · $800 SAVED</span></div>
-              <div class="a-check">✓</div>
-            </div>
-            <div class="a-info"><h4>Print Flyer (8.5×11)</h4><p>QR code + full details</p></div>
-          </div>
-          <div class="asset-card sel" onclick="toggleAsset(this)">
-            <div class="a-thumb" style="background:#f8f8f8;padding:12px;justify-content:flex-start;gap:4px">
-              <div style="width:100%;height:12px;background:var(--navy);border-radius:3px 3px 0 0;margin-bottom:8px"></div>
-              <div style="width:90%;height:5px;background:#ddd;border-radius:3px;margin:0 auto 4px"></div>
-              <div style="width:75%;height:5px;background:#ddd;border-radius:3px;margin:0 auto 4px"></div>
-              <div style="width:48px;height:14px;background:var(--gold);border-radius:4px;margin:10px auto 0"></div>
-              <div class="a-check">✓</div>
-            </div>
-            <div class="a-info"><h4>Email Template</h4><p>Copy-paste ready</p></div>
-          </div>
-          <div class="asset-card" onclick="toggleAsset(this)">
-            <div class="a-thumb" style="background:linear-gradient(135deg,#1a2744,#2d5a7b)">
-              <div style="width:70%;height:6px;background:rgba(255,255,255,0.4);border-radius:3px;margin:0 auto 4px"></div>
-              <div style="font-size:18px;font-weight:700;color:var(--gold)">$1,800</div>
-              <div style="font-size:8px;color:rgba(255,255,255,0.5)">Raised for Grace Community</div>
-              <div style="width:42px;height:42px;background:rgba(255,255,255,0.9);border-radius:5px;margin-top:8px"></div>
-              <div class="a-check">✓</div>
-            </div>
-            <div class="a-info"><h4>Social Post</h4><p>Instagram & Facebook</p></div>
-          </div>
-          <div class="asset-card" onclick="toggleAsset(this)">
-            <div class="a-thumb" style="background:#f4f0ea;padding:14px;justify-content:flex-start;gap:3px">
-              <div style="width:70%;height:5px;background:var(--navy-light);border-radius:3px;margin-bottom:7px"></div>
-              <div style="width:95%;height:3px;background:#ddd;border-radius:2px"></div>
-              <div style="width:80%;height:3px;background:#ddd;border-radius:2px"></div>
-              <div style="width:88%;height:3px;background:#e0dbd2;border-radius:2px"></div>
-              <div class="a-check">✓</div>
-            </div>
-            <div class="a-info"><h4>Pastor Script</h4><p>2-min Sunday announcement</p></div>
-          </div>
-          <div class="asset-card sel" onclick="toggleAsset(this)">
-            <div class="a-thumb" style="background:#2E3F6B">
-              <div style="width:50px;height:68px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
-                <div style="font-size:8px;color:rgba(255,255,255,0.7);font-weight:600">GCC</div>
-                <div style="width:30px;height:30px;background:#fff;border-radius:4px"></div>
-                <div style="font-size:7px;color:var(--gold)">Scan to subscribe</div>
+  <!-- ========== ORDER ========== -->
+  <div class="page" id="page-order">
+    <div class="order-wrapper">
+      <div class="page-hdr">
+        <div class="breadcrumb">Dashboard › Order Assets</div>
+        <h1>Marketing Asset Order</h1>
+        <p>Preview, customize, and order your branded fundraising materials for Grace Community Church.</p>
+      </div>
+      <div class="prog-bar">
+        <div class="prog-item">
+          <div class="prog-circle done">✓</div><span class="prog-label done">Church Setup</span>
+        </div>
+        <div class="prog-line done"></div>
+        <div class="prog-item">
+          <div class="prog-circle active">2</div><span class="prog-label active">Review Assets</span>
+        </div>
+        <div class="prog-line"></div>
+        <div class="prog-item">
+          <div class="prog-circle todo">3</div><span class="prog-label todo">Select Quantity</span>
+        </div>
+        <div class="prog-line"></div>
+        <div class="prog-item">
+          <div class="prog-circle todo">4</div><span class="prog-label todo">Submit Order</span>
+        </div>
+      </div>
+      <div class="order-grid">
+        <div>
+          <div class="sec-title"><span>📄</span> Select assets to include</div>
+          <div class="asset-grid">
+            <div class="asset-card sel" onclick="toggleAsset(this)">
+              <div class="a-thumb">
+                <div class="a-logo"></div>
+                <div class="a-line1"></div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.5);text-align:center;padding:0 8px">"Save on Energy.
+                  Support Your Church."</div>
+                <div class="a-qr"></div>
+                <div class="a-band"><span>$25/YR · $15 TO CHURCH · $800 SAVED</span></div>
+                <div class="a-check">✓</div>
               </div>
-              <div class="a-check">✓</div>
+              <div class="a-info">
+                <h4>Print Flyer (8.5×11)</h4>
+                <p>QR code + full details</p>
+              </div>
             </div>
-            <div class="a-info"><h4>Table Card (4×6)</h4><p>For lobby & welcome table</p></div>
+            <div class="asset-card sel" onclick="toggleAsset(this)">
+              <div class="a-thumb" style="background:#f8f8f8;padding:12px;justify-content:flex-start;gap:4px">
+                <div style="width:100%;height:12px;background:var(--navy);border-radius:3px 3px 0 0;margin-bottom:8px">
+                </div>
+                <div style="width:90%;height:5px;background:#ddd;border-radius:3px;margin:0 auto 4px"></div>
+                <div style="width:75%;height:5px;background:#ddd;border-radius:3px;margin:0 auto 4px"></div>
+                <div style="width:48px;height:14px;background:var(--gold);border-radius:4px;margin:10px auto 0"></div>
+                <div class="a-check">✓</div>
+              </div>
+              <div class="a-info">
+                <h4>Email Template</h4>
+                <p>Copy-paste ready</p>
+              </div>
+            </div>
+            <div class="asset-card" onclick="toggleAsset(this)">
+              <div class="a-thumb" style="background:linear-gradient(135deg,#1a2744,#2d5a7b)">
+                <div style="width:70%;height:6px;background:rgba(255,255,255,0.4);border-radius:3px;margin:0 auto 4px">
+                </div>
+                <div style="font-size:18px;font-weight:700;color:var(--gold)">$1,800</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.5)">Raised for Grace Community</div>
+                <div style="width:42px;height:42px;background:rgba(255,255,255,0.9);border-radius:5px;margin-top:8px">
+                </div>
+                <div class="a-check">✓</div>
+              </div>
+              <div class="a-info">
+                <h4>Social Post</h4>
+                <p>Instagram & Facebook</p>
+              </div>
+            </div>
+            <div class="asset-card" onclick="toggleAsset(this)">
+              <div class="a-thumb" style="background:#f4f0ea;padding:14px;justify-content:flex-start;gap:3px">
+                <div style="width:70%;height:5px;background:var(--navy-light);border-radius:3px;margin-bottom:7px">
+                </div>
+                <div style="width:95%;height:3px;background:#ddd;border-radius:2px"></div>
+                <div style="width:80%;height:3px;background:#ddd;border-radius:2px"></div>
+                <div style="width:88%;height:3px;background:#e0dbd2;border-radius:2px"></div>
+                <div class="a-check">✓</div>
+              </div>
+              <div class="a-info">
+                <h4>Pastor Script</h4>
+                <p>2-min Sunday announcement</p>
+              </div>
+            </div>
+            <div class="asset-card sel" onclick="toggleAsset(this)">
+              <div class="a-thumb" style="background:#2E3F6B">
+                <div
+                  style="width:50px;height:68px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
+                  <div style="font-size:8px;color:rgba(255,255,255,0.7);font-weight:600">GCC</div>
+                  <div style="width:30px;height:30px;background:#fff;border-radius:4px"></div>
+                  <div style="font-size:7px;color:var(--gold)">Scan to subscribe</div>
+                </div>
+                <div class="a-check">✓</div>
+              </div>
+              <div class="a-info">
+                <h4>Table Card (4×6)</h4>
+                <p>For lobby & welcome table</p>
+              </div>
+            </div>
+            <div class="asset-card" onclick="toggleAsset(this)">
+              <div class="a-thumb" style="background:#fefcf8;padding:12px">
+                <div style="width:75%;height:5px;background:var(--navy-light);border-radius:3px;margin-bottom:6px">
+                </div>
+                <div style="width:95%;height:3px;background:#e0dbd2;border-radius:2px;margin-bottom:4px"></div>
+                <div style="width:80%;height:3px;background:#ddd;border-radius:2px;margin-bottom:4px"></div>
+                <div style="width:48px;height:14px;background:var(--gold-light);border-radius:4px;margin-top:8px"></div>
+                <div class="a-check">✓</div>
+              </div>
+              <div class="a-info">
+                <h4>Bulletin Insert</h4>
+                <p>Half-page bulletin card</p>
+              </div>
+            </div>
           </div>
-          <div class="asset-card" onclick="toggleAsset(this)">
-            <div class="a-thumb" style="background:#fefcf8;padding:12px">
-              <div style="width:75%;height:5px;background:var(--navy-light);border-radius:3px;margin-bottom:6px"></div>
-              <div style="width:95%;height:3px;background:#e0dbd2;border-radius:2px;margin-bottom:4px"></div>
-              <div style="width:80%;height:3px;background:#ddd;border-radius:2px;margin-bottom:4px"></div>
-              <div style="width:48px;height:14px;background:var(--gold-light);border-radius:4px;margin-top:8px"></div>
-              <div class="a-check">✓</div>
+
+          <div class="sec-title"><span>📦</span> Flyer quantity</div>
+          <div class="qty-options">
+            <div class="qty-btn" onclick="pickQty(this,50,10)">
+              <div class="qty-num">50</div>
+              <div class="qty-label">$10</div>
             </div>
-            <div class="a-info"><h4>Bulletin Insert</h4><p>Half-page bulletin card</p></div>
+            <div class="qty-btn sel" onclick="pickQty(this,100,18)">
+              <div class="qty-num">100</div>
+              <div class="qty-label">$18</div>
+            </div>
+            <div class="qty-btn" onclick="pickQty(this,250,35)">
+              <div class="qty-num">250</div>
+              <div class="qty-label">$35</div>
+            </div>
+            <div class="qty-btn" onclick="pickQty(this,500,55)">
+              <div class="qty-num">500</div>
+              <div class="qty-label">$55</div>
+            </div>
           </div>
         </div>
-
-        <div class="sec-title"><span>📦</span> Flyer quantity</div>
-        <div class="qty-options">
-          <div class="qty-btn" onclick="pickQty(this,50,10)"><div class="qty-num">50</div><div class="qty-label">$10</div></div>
-          <div class="qty-btn sel" onclick="pickQty(this,100,18)"><div class="qty-num">100</div><div class="qty-label">$18</div></div>
-          <div class="qty-btn" onclick="pickQty(this,250,35)"><div class="qty-num">250</div><div class="qty-label">$35</div></div>
-          <div class="qty-btn" onclick="pickQty(this,500,55)"><div class="qty-num">500</div><div class="qty-label">$55</div></div>
+        <div class="summary-card">
+          <h3>Order Summary</h3>
+          <div class="sum-row"><span class="lbl">Print Flyers (100)</span><span class="val"
+              id="flyer-price">$18.00</span></div>
+          <div class="sum-row"><span class="lbl">Email Template</span><span class="val">Free</span></div>
+          <div class="sum-row"><span class="lbl">Table Cards (25)</span><span class="val">$8.00</span></div>
+          <div class="sum-row"><span class="lbl">Shipping</span><span class="val">$6.99</span></div>
+          <div class="sum-total"><span class="lbl">Total</span><span class="val" id="order-total">$32.99</span></div>
+          <div class="church-note"><span style="font-size:18px">🌿</span>
+            <p>Materials are <strong>pre-approved</strong> and branded automatically with Grace Community Church.</p>
+          </div>
+          <button class="btn-full" onclick="go('dashboard')">Submit Order →</button>
+          <p class="delivery">📬 Delivered within 5 business days</p>
         </div>
       </div>
-      <div class="summary-card">
-        <h3>Order Summary</h3>
-        <div class="sum-row"><span class="lbl">Print Flyers (100)</span><span class="val" id="flyer-price">$18.00</span></div>
-        <div class="sum-row"><span class="lbl">Email Template</span><span class="val">Free</span></div>
-        <div class="sum-row"><span class="lbl">Table Cards (25)</span><span class="val">$8.00</span></div>
-        <div class="sum-row"><span class="lbl">Shipping</span><span class="val">$6.99</span></div>
-        <div class="sum-total"><span class="lbl">Total</span><span class="val" id="order-total">$32.99</span></div>
-        <div class="church-note"><span style="font-size:18px">🌿</span><p>Materials are <strong>pre-approved</strong> and branded automatically with Grace Community Church.</p></div>
-        <button class="btn-full" onclick="go('dashboard')">Submit Order →</button>
-        <p class="delivery">📬 Delivered within 5 business days</p>
+    </div>
+  </div>
+
+  <!-- ========== DASHBOARD ========== -->
+  <div class="page" id="page-dashboard">
+    <div class="dash-wrapper">
+      <div class="dash-top">
+        <div class="greeting">
+          <h2>Grace Community Church</h2>
+          <p>Fundraiser Campaign · Spring 2025 · Week 2 of 2</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn-sm outline">Download Report</button>
+          <button class="btn-sm solid" onclick="go('order')">Order More Assets</button>
+        </div>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-card hl">
+          <div class="m-label">Total Raised</div>
+          <div class="m-value" id="raised-val">$0</div>
+          <div class="m-change">↑ $315 this week</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">Subscriptions</div>
+          <div class="m-value" id="subs-val">0</div>
+          <div class="m-change">↑ 21 this week</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">Conversion Rate</div>
+          <div class="m-value">34%</div>
+          <div class="m-change neutral">QR scans → subs</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">Member Savings</div>
+          <div class="m-value">$68K</div>
+          <div class="m-change">Est. annual value</div>
+        </div>
+      </div>
+      <div class="prog-section">
+        <div class="prog-hdr">
+          <h3>Campaign Progress</h3><span>Goal: $2,500 · 85 subscribers</span>
+        </div>
+        <div class="prog-track">
+          <div class="prog-fill" id="prog-fill"></div>
+        </div>
+        <div class="prog-sub"><span>$1,275 raised (51%)</span><span>$1,225 to goal</span></div>
+      </div>
+      <div class="share-section">
+        <div class="share-text">
+          <h3>Share your progress</h3>
+          <p>Use this graphic in your Sunday announcement or social media.</p>
+        </div>
+        <div class="share-graphic">
+          <div class="share-num">$1,275 Raised</div>
+          <div class="share-lbl">Grace Community Church · 85 subscribers</div>
+        </div>
+        <div class="share-btns"><button class="btn-share copy">Copy Graphic</button><button
+            class="btn-share dl">Download PNG</button></div>
+      </div>
+      <div class="dash-cols">
+        <div class="subs-section">
+          <h3>Recent Subscriptions</h3>
+          <table class="subs-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>To Church</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Margaret T.</td>
+                <td>Today, 11:42am</td>
+                <td>$15.00</td>
+                <td><span class="s-status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>David & Carol W.</td>
+                <td>Today, 9:15am</td>
+                <td>$15.00</td>
+                <td><span class="s-status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>Pastor & Family</td>
+                <td>Yesterday</td>
+                <td>$15.00</td>
+                <td><span class="s-status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>James R.</td>
+                <td>May 28</td>
+                <td>$15.00</td>
+                <td><span class="s-status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>The Johnson Family</td>
+                <td>May 27</td>
+                <td>$15.00</td>
+                <td><span class="s-status pending">Processing</span></td>
+              </tr>
+              <tr>
+                <td>Sandra M.</td>
+                <td>May 26</td>
+                <td>$15.00</td>
+                <td><span class="s-status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>Robert & Linda K.</td>
+                <td>May 25</td>
+                <td>$15.00</td>
+                <td><span class="s-status active">Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="timeline-section">
+          <h3>Campaign Timeline</h3>
+          <div class="tl-item">
+            <div class="tl-dot done"></div>
+            <div class="tl-content">
+              <h4>Sunday #1 — Launch</h4>
+              <p>Flyer distribution + Pastor announcement</p><span class="tl-badge done">Completed</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot done"></div>
+            <div class="tl-content">
+              <h4>Monday — Email Blast</h4>
+              <p>Follow-up email sent to 340 members</p><span class="tl-badge done">Sent · 42% open rate</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot active"></div>
+            <div class="tl-content">
+              <h4>Midweek Reminder</h4>
+              <p>Social media post · Due Wednesday</p><span class="tl-badge active">Due tomorrow</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot pending"></div>
+            <div class="tl-content">
+              <h4>Sunday #2 — Final Push</h4>
+              <p>Results announcement + last call</p><span class="tl-badge pending">This Sunday</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot pending"></div>
+            <div class="tl-content">
+              <h4>Campaign Summary</h4>
+              <p>PDF report + annual renewal prompt</p><span class="tl-badge pending">Next week</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ========== DASHBOARD ========== -->
-<div class="page" id="page-dashboard">
-  <div class="dash-wrapper">
-    <div class="dash-top">
-      <div class="greeting"><h2>Grace Community Church</h2><p>Fundraiser Campaign · Spring 2025 · Week 2 of 2</p></div>
-      <div class="dash-actions">
-        <button class="btn-sm outline">Download Report</button>
-        <button class="btn-sm solid" onclick="go('order')">Order More Assets</button>
-      </div>
-    </div>
-    <div class="metrics-grid">
-      <div class="metric-card hl"><div class="m-label">Total Raised</div><div class="m-value" id="raised-val">$0</div><div class="m-change">↑ $315 this week</div></div>
-      <div class="metric-card"><div class="m-label">Subscriptions</div><div class="m-value" id="subs-val">0</div><div class="m-change">↑ 21 this week</div></div>
-      <div class="metric-card"><div class="m-label">Conversion Rate</div><div class="m-value">34%</div><div class="m-change neutral">QR scans → subs</div></div>
-      <div class="metric-card"><div class="m-label">Member Savings</div><div class="m-value">$68K</div><div class="m-change">Est. annual value</div></div>
-    </div>
-    <div class="prog-section">
-      <div class="prog-hdr"><h3>Campaign Progress</h3><span>Goal: $2,500 · 85 subscribers</span></div>
-      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
-      <div class="prog-sub"><span>$1,275 raised (51%)</span><span>$1,225 to goal</span></div>
-    </div>
-    <div class="share-section">
-      <div class="share-text"><h3>Share your progress</h3><p>Use this graphic in your Sunday announcement or social media.</p></div>
-      <div class="share-graphic"><div class="share-num">$1,275 Raised</div><div class="share-lbl">Grace Community Church · 85 subscribers</div></div>
-      <div class="share-btns"><button class="btn-share copy">Copy Graphic</button><button class="btn-share dl">Download PNG</button></div>
-    </div>
-    <div class="dash-cols">
-      <div class="subs-section">
-        <h3>Recent Subscriptions</h3>
-        <table class="subs-table">
-          <thead><tr><th>Name</th><th>Date</th><th>To Church</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>Margaret T.</td><td>Today, 11:42am</td><td>$15.00</td><td><span class="s-status active">Active</span></td></tr>
-            <tr><td>David & Carol W.</td><td>Today, 9:15am</td><td>$15.00</td><td><span class="s-status active">Active</span></td></tr>
-            <tr><td>Pastor & Family</td><td>Yesterday</td><td>$15.00</td><td><span class="s-status active">Active</span></td></tr>
-            <tr><td>James R.</td><td>May 28</td><td>$15.00</td><td><span class="s-status active">Active</span></td></tr>
-            <tr><td>The Johnson Family</td><td>May 27</td><td>$15.00</td><td><span class="s-status pending">Processing</span></td></tr>
-            <tr><td>Sandra M.</td><td>May 26</td><td>$15.00</td><td><span class="s-status active">Active</span></td></tr>
-            <tr><td>Robert & Linda K.</td><td>May 25</td><td>$15.00</td><td><span class="s-status active">Active</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="timeline-section">
-        <h3>Campaign Timeline</h3>
-        <div class="tl-item"><div class="tl-dot done"></div><div class="tl-content"><h4>Sunday #1 — Launch</h4><p>Flyer distribution + Pastor announcement</p><span class="tl-badge done">Completed</span></div></div>
-        <div class="tl-item"><div class="tl-dot done"></div><div class="tl-content"><h4>Monday — Email Blast</h4><p>Follow-up email sent to 340 members</p><span class="tl-badge done">Sent · 42% open rate</span></div></div>
-        <div class="tl-item"><div class="tl-dot active"></div><div class="tl-content"><h4>Midweek Reminder</h4><p>Social media post · Due Wednesday</p><span class="tl-badge active">Due tomorrow</span></div></div>
-        <div class="tl-item"><div class="tl-dot pending"></div><div class="tl-content"><h4>Sunday #2 — Final Push</h4><p>Results announcement + last call</p><span class="tl-badge pending">This Sunday</span></div></div>
-        <div class="tl-item"><div class="tl-dot pending"></div><div class="tl-content"><h4>Campaign Summary</h4><p>PDF report + annual renewal prompt</p><span class="tl-badge pending">Next week</span></div></div>
+  <div class="flyer-lightbox" id="flyer-lightbox" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="flyer-lb-title">
+    <div class="flyer-lightbox-backdrop" onclick="closeFlyerPreview()"></div>
+    <div class="flyer-lightbox-panel">
+      <button type="button" class="flyer-lightbox-close" onclick="closeFlyerPreview()"
+        aria-label="Close preview">×</button>
+      <p class="flyer-lightbox-hint" id="flyer-lb-title">Print flyer preview · 8.5×11</p>
+      <div class="flyer-lightbox-sheet">
+        <div class="flyer-lb-mockup">
+          <div id="flyer-lb-logo"></div>
+          <div class="flyer-lb-name" id="flyer-lb-name"></div>
+          <div class="flyer-lb-tagline" id="flyer-lb-tagline"></div>
+          <div class="flyer-lb-loc" id="flyer-lb-loc"></div>
+          <div class="flyer-lb-mem" id="flyer-lb-mem"></div>
+          <div class="flyer-lb-qr" aria-hidden="true"></div>
+          <div class="flyer-lb-band"><span>$25/YR · $15 TO YOUR CHURCH</span></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="flyer-lightbox" id="flyer-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="flyer-lb-title">
-  <div class="flyer-lightbox-backdrop" onclick="closeFlyerPreview()"></div>
-  <div class="flyer-lightbox-panel">
-    <button type="button" class="flyer-lightbox-close" onclick="closeFlyerPreview()" aria-label="Close preview">×</button>
-    <p class="flyer-lightbox-hint" id="flyer-lb-title">Print flyer preview · 8.5×11</p>
-    <div class="flyer-lightbox-sheet">
-      <div class="flyer-lb-mockup">
-        <div id="flyer-lb-logo"></div>
-        <div class="flyer-lb-name" id="flyer-lb-name"></div>
-        <div class="flyer-lb-tagline" id="flyer-lb-tagline"></div>
-        <div class="flyer-lb-loc" id="flyer-lb-loc"></div>
-        <div class="flyer-lb-mem" id="flyer-lb-mem"></div>
-        <div class="flyer-lb-qr" aria-hidden="true"></div>
-        <div class="flyer-lb-band"><span>$25/YR · $15 TO YOUR CHURCH</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+  <script>
+    var sgStep = 1;
+    var churchProfile = window.churchProfileData || {};
 
-<script>
-var sgStep = 1;
-var churchProfile = window.churchProfileData || {};
-
-function go(name) {
-  var pages = document.querySelectorAll('.page');
-  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('show');
-  var btns = document.querySelectorAll('.nav-btn');
-  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-  document.getElementById('page-' + name).classList.add('show');
-  var map = {landing:0, login:1, signup:2, order:3, dashboard:4};
-  if (map[name] !== undefined) btns[map[name]].classList.add('active');
-  window.scrollTo(0, 0);
-  if (name === 'dashboard') initDash();
-}
-
-function sgNext(step) {
-  var name = (document.getElementById('sg-church-name').value || '').trim() || 'Your Church';
-  if (step === 3) renderMarketingPreview();
-  if (step === 4) document.getElementById('confirm-name').textContent = name;
-  document.getElementById('sp' + sgStep).classList.remove('show');
-  document.getElementById('sp' + step).classList.add('show');
-  updateProg(step);
-  sgStep = step;
-  window.scrollTo(0, 0);
-}
-
-function sgBack(step) {
-  document.getElementById('sp' + sgStep).classList.remove('show');
-  document.getElementById('sp' + step).classList.add('show');
-  updateProg(step);
-  sgStep = step;
-  window.scrollTo(0, 0);
-}
-
-function updateProg(step) {
-  for (var i = 1; i <= 4; i++) {
-    var c = document.getElementById('sc' + i);
-    var l = document.getElementById('sl' + i);
-    if (i < step) {
-      c.className = 'ss-circle done'; c.textContent = '✓';
-      l.className = 'ss-label done';
-    } else if (i === step) {
-      c.className = 'ss-circle cur'; c.textContent = i;
-      l.className = 'ss-label cur';
-    } else {
-      c.className = 'ss-circle todo'; c.textContent = i;
-      l.className = 'ss-label todo';
+    function go(name) {
+      var pages = document.querySelectorAll('.page');
+      for (var i = 0; i < pages.length; i++) pages[i].classList.remove('show');
+      var btns = document.querySelectorAll('.nav-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      document.getElementById('page-' + name).classList.add('show');
+      var map = { landing: 0, login: 1, signup: 2, order: 3, dashboard: 4 };
+      if (map[name] !== undefined) btns[map[name]].classList.add('active');
+      window.scrollTo(0, 0);
+      if (name === 'dashboard') initDash();
     }
-    if (i < 4) {
-      var line = document.getElementById('sline' + i);
-      line.className = i < step ? 'ss-line done' : 'ss-line';
+
+    function sgNext(step) {
+      var name = (document.getElementById('sg-church-name').value || '').trim() || 'Your Church';
+      if (step === 3) renderMarketingPreview();
+      if (step === 4) document.getElementById('confirm-name').textContent = name;
+      document.getElementById('sp' + sgStep).classList.remove('show');
+      document.getElementById('sp' + step).classList.add('show');
+      updateProg(step);
+      sgStep = step;
+      window.scrollTo(0, 0);
     }
-  }
-}
 
-function renderCongregationSizeOnFile() {
-  var sizeEl = document.getElementById('congregation-size-on-file');
-  if (!sizeEl) return;
-  var size = Number(churchProfile.congregationSize);
-  if (Number.isFinite(size) && size > 0) {
-    sizeEl.textContent = size.toLocaleString() + ' members';
-  } else {
-    sizeEl.textContent = 'your congregation size on file';
-  }
-}
-
-function gv(id) {
-  var el = document.getElementById(id);
-  return el ? String(el.value || '').trim() : '';
-}
-
-function getStateCode() {
-  var el = document.getElementById('sg-state');
-  if (!el || el.selectedIndex <= 0) return '';
-  return String(el.value || '').trim();
-}
-
-function churchSlug(name) {
-  var s = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-  return (s || 'your-church').slice(0, 36);
-}
-
-function churchInitials(name) {
-  var parts = name.split(/\s+/).filter(function(w) { return w.length > 0; });
-  if (!parts.length) return 'CH';
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-}
-
-function logoMarkHtml(px, fontPx) {
-  var name = gv('sg-church-name') || 'Your Church';
-  var ini = churchInitials(name);
-  var r = Math.max(6, Math.round(px * 0.22));
-  return '<div style="width:' + px + 'px;height:' + px + 'px;border-radius:' + r + 'px;background:#1A2744;display:flex;align-items:center;justify-content:center;color:#fff;font-family:\'Lora\',serif;font-size:' + fontPx + 'px;font-weight:600">' + ini + '</div>';
-}
-
-function syncCongregationFromStep2() {
-  var corrEl = document.getElementById('sg-congregation-correct');
-  if (corrEl && String(corrEl.value || '').trim()) {
-    var cn = Number(String(corrEl.value).trim());
-    if (Number.isFinite(cn) && cn > 0) churchProfile.congregationSize = cn;
-  }
-}
-
-function formatCityState() {
-  var city = gv('sg-city');
-  var st = getStateCode();
-  if (city && st) return city + ', ' + st;
-  return city || st || '';
-}
-
-function formatAddressOneLine() {
-  var street = gv('sg-street');
-  var rest = formatCityState();
-  var zip = gv('sg-zip');
-  var parts = [];
-  if (street) parts.push(street);
-  if (rest) parts.push(rest);
-  if (zip) parts.push(zip);
-  return parts.join(' · ');
-}
-
-function updateStep2LogoPreview() {
-  var el = document.getElementById('sg-logo-preview');
-  if (!el) return;
-  el.innerHTML = logoMarkHtml(130, 28);
-}
-
-function renderMarketingPreview() {
-  syncCongregationFromStep2();
-  var name = gv('sg-church-name') || 'Your Church';
-  var slug = churchSlug(name);
-  var loc = formatCityState();
-  var addr = formatAddressOneLine();
-  var size = Number(churchProfile.congregationSize);
-  var memLabel = Number.isFinite(size) && size > 0 ? size.toLocaleString() + ' members' : '';
-  var adminFirst = gv('sg-admin-first');
-  var email = gv('sg-contact-email');
-  var phone = gv('sg-phone');
-  var notes = gv('sg-brand-notes');
-  var shortName = name.split(' ').slice(0, 2).join(' ');
-
-  var previewName = document.getElementById('preview-church-name');
-  if (previewName) previewName.textContent = name;
-  var pa1 = document.getElementById('pa-name1');
-  if (pa1) pa1.textContent = name;
-  var pa3 = document.getElementById('pa-name3');
-  if (pa3) pa3.textContent = name;
-  var pa4 = document.getElementById('pa-name4');
-  if (pa4) pa4.textContent = name.split(' ').slice(0, 3).join(' ');
-  var words = name.split(' ').filter(function(w) { return w.length > 2; });
-  var abbr = words.map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 3);
-  if (!abbr) abbr = name.slice(0, 3).toUpperCase();
-  var pa2 = document.getElementById('pa-name2');
-  if (pa2) pa2.textContent = abbr;
-
-  var flyerLogo = document.getElementById('pa-flyer-logo');
-  if (flyerLogo) flyerLogo.innerHTML = logoMarkHtml(30, 10);
-  var ft = document.getElementById('pa-flyer-tagline');
-  if (ft) ft.textContent = 'Save on Energy · Support ' + shortName;
-  var fl = document.getElementById('pa-flyer-location');
-  if (fl) fl.textContent = loc || addr || '';
-  var fm = document.getElementById('pa-flyer-members');
-  if (fm) fm.textContent = memLabel;
-  var fc = document.getElementById('pa-flyer-caption');
-  if (fc) fc.textContent = loc ? 'Includes ' + loc + ' on every print' : 'QR code · front & back';
-
-  var tableLogo = document.getElementById('pa-table-logo');
-  if (tableLogo) tableLogo.innerHTML = logoMarkHtml(28, 10);
-  var tc = document.getElementById('pa-table-caption');
-  if (tc) tc.textContent = abbr + ' · welcome table';
-
-  var sh = document.getElementById('pa-social-highlight');
-  var ss = document.getElementById('pa-social-sub');
-  if (sh && ss && Number.isFinite(size) && size > 0) {
-    sh.textContent = size.toLocaleString();
-    ss.textContent = 'members · ' + (loc || 'your community');
-  } else if (sh && ss) {
-    sh.textContent = 'Join us';
-    ss.textContent = 'Support ' + shortName;
-  }
-  var socialLogo = document.getElementById('pa-social-logo');
-  if (socialLogo) socialLogo.innerHTML = logoMarkHtml(38, 12);
-  var sc = document.getElementById('pa-social-caption');
-  if (sc) {
-    var cityWord = loc.split(',')[0] || '';
-    sc.textContent = cityWord ? 'Sized for ' + cityWord + ' feeds' : 'Instagram & Facebook';
-  }
-
-  var eh = document.getElementById('pa-email-header');
-  if (eh) eh.textContent = name.length > 32 ? name.slice(0, 30) + '…' : name;
-  var eb = document.getElementById('pa-email-blurb');
-  if (eb) {
-    var emailBlurb = 'Hi — a quick note from ' + name + '. We are sharing a simple way to save on home energy';
-    if (loc) emailBlurb += ' in ' + loc.split(',')[0];
-    emailBlurb += ', with part of every signup supporting our church.';
-    if (emailBlurb.length > 190) emailBlurb = emailBlurb.slice(0, 187) + '…';
-    eb.textContent = emailBlurb;
-  }
-  var ec = document.getElementById('pa-email-caption');
-  if (ec) ec.textContent = email ? 'Replies to your church inbox' : 'Copy-paste ready';
-
-  var pastorOpening = 'This month, ' + name + ' is offering Home Lari: families save on bills and a share comes back to our ministry';
-  if (Number.isFinite(size) && size > 0) {
-    pastorOpening += ' (about ' + size.toLocaleString() + ' members strong)';
-  }
-  pastorOpening += '. Scan the QR in your bulletin or pick up a card in the lobby.';
-  if (adminFirst) {
-    pastorOpening = adminFirst + ', here is your line: ' + pastorOpening;
-  }
-  if (notes) {
-    pastorOpening += ' Note for our team: ' + (notes.length > 72 ? notes.slice(0, 69) + '…' : notes);
-  }
-  if (pastorOpening.length > 250) pastorOpening = pastorOpening.slice(0, 247) + '…';
-  var pb = document.getElementById('pa-pastor-blurb');
-  if (pb) pb.textContent = pastorOpening;
-  var pc = document.getElementById('pa-pastor-caption');
-  if (pc) pc.textContent = phone ? 'Includes call-to-action & ' + phone : '2-min Sunday announcement';
-
-  var qrLogo = document.getElementById('pa-qr-logo');
-  if (qrLogo) qrLogo.innerHTML = logoMarkHtml(44, 13);
-  var qu = document.getElementById('pa-qr-url');
-  if (qu) qu.textContent = 'homelari.com/' + slug;
-  var qc = document.getElementById('pa-qr-caption');
-  if (qc) qc.textContent = 'Your link: /' + slug;
-
-  refreshFlyerLightbox();
-}
-
-function refreshFlyerLightbox() {
-  syncCongregationFromStep2();
-  var name = gv('sg-church-name') || 'Your Church';
-  var size = Number(churchProfile.congregationSize);
-  var loc = formatCityState();
-  var addr = formatAddressOneLine();
-  var shortName = name.split(' ').slice(0, 2).join(' ');
-  var memLabel = Number.isFinite(size) && size > 0 ? size.toLocaleString() + ' members' : '';
-
-  var lg = document.getElementById('flyer-lb-logo');
-  if (lg) lg.innerHTML = logoMarkHtml(72, 22);
-  var elName = document.getElementById('flyer-lb-name');
-  if (elName) elName.textContent = name;
-  var elTag = document.getElementById('flyer-lb-tagline');
-  if (elTag) elTag.textContent = 'Save on Energy · Support ' + shortName;
-  var elLoc = document.getElementById('flyer-lb-loc');
-  if (elLoc) elLoc.textContent = loc || addr || '';
-  var elMem = document.getElementById('flyer-lb-mem');
-  if (elMem) elMem.textContent = memLabel;
-}
-
-function openFlyerPreview() {
-  refreshFlyerLightbox();
-  var lb = document.getElementById('flyer-lightbox');
-  if (!lb) return;
-  lb.classList.add('open');
-  lb.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeFlyerPreview() {
-  var lb = document.getElementById('flyer-lightbox');
-  if (!lb) return;
-  lb.classList.remove('open');
-  lb.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-function simulateUpload() {
-  setTimeout(function() {
-    document.getElementById('upload-ok').style.display = 'flex';
-  }, 500);
-}
-
-function toggleLogoUpload(showUpload) {
-  document.getElementById('new-logo-upload').style.display = showUpload ? 'block' : 'none';
-  if (!showUpload) document.getElementById('upload-ok').style.display = 'none';
-}
-
-function toggleCongregationInput(showInput) {
-  document.getElementById('congregation-correct-wrap').style.display = showInput ? 'block' : 'none';
-}
-
-function toggleAsset(card) {
-  card.classList.toggle('sel');
-}
-
-function pickQty(btn, qty, price) {
-  var btns = document.querySelectorAll('.qty-btn');
-  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('sel');
-  btn.classList.add('sel');
-  var base = 8 + 6.99;
-  document.getElementById('flyer-price').textContent = '$' + price.toFixed(2);
-  document.getElementById('order-total').textContent = '$' + (base + price).toFixed(2);
-}
-
-var dashReady = false;
-function initDash() {
-  if (dashReady) return;
-  dashReady = true;
-  countUp('raised-val', 1275, '$');
-  countUp('subs-val', 85, '');
-  setTimeout(function() {
-    document.getElementById('prog-fill').style.width = '51%';
-  }, 200);
-}
-
-function countUp(id, target, prefix) {
-  var el = document.getElementById(id);
-  var current = 0;
-  var step = target / 60;
-  var timer = setInterval(function() {
-    current = Math.min(current + step, target);
-    el.textContent = prefix + Math.round(current).toLocaleString();
-    if (current >= target) clearInterval(timer);
-  }, 16);
-}
-
-// Signup panel uses 'show' class - patch the sg panel logic
-document.addEventListener('DOMContentLoaded', function() {
-  var panels = document.querySelectorAll('.sg-panel');
-  for (var i = 0; i < panels.length; i++) {
-    if (panels[i].classList.contains('show')) {
-      panels[i].style.display = 'block';
+    function sgBack(step) {
+      document.getElementById('sp' + sgStep).classList.remove('show');
+      document.getElementById('sp' + step).classList.add('show');
+      updateProg(step);
+      sgStep = step;
+      window.scrollTo(0, 0);
     }
-  }
-  var szInput = document.getElementById('sg-congregation-size');
-  if (szInput && Number(churchProfile.congregationSize) > 0) {
-    szInput.value = String(churchProfile.congregationSize);
-  }
-  renderCongregationSizeOnFile();
-  updateStep2LogoPreview();
-  document.addEventListener('keydown', function(e) {
-    if (e.key !== 'Escape') return;
-    var lb = document.getElementById('flyer-lightbox');
-    if (lb && lb.classList.contains('open')) closeFlyerPreview();
-  });
-});
 
-// Override sgNext/sgBack to use style.display for sg-panels
-var _sgNext = sgNext;
-var _sgBack = sgBack;
-sgNext = function(step) {
-  document.getElementById('sp' + sgStep).style.display = 'none';
-  if (step === 2) {
-    var szEl = document.getElementById('sg-congregation-size');
-    if (szEl) {
-      var n = Number(String(szEl.value || '').trim());
-      if (Number.isFinite(n) && n > 0) churchProfile.congregationSize = n;
+    function updateProg(step) {
+      for (var i = 1; i <= 4; i++) {
+        var c = document.getElementById('sc' + i);
+        var l = document.getElementById('sl' + i);
+        if (i < step) {
+          c.className = 'ss-circle done'; c.textContent = '✓';
+          l.className = 'ss-label done';
+        } else if (i === step) {
+          c.className = 'ss-circle cur'; c.textContent = i;
+          l.className = 'ss-label cur';
+        } else {
+          c.className = 'ss-circle todo'; c.textContent = i;
+          l.className = 'ss-label todo';
+        }
+        if (i < 4) {
+          var line = document.getElementById('sline' + i);
+          line.className = i < step ? 'ss-line done' : 'ss-line';
+        }
+      }
     }
-    renderCongregationSizeOnFile();
-    updateStep2LogoPreview();
-  }
-  var name = (document.getElementById('sg-church-name').value || '').trim() || 'Your Church';
-  if (step === 3) renderMarketingPreview();
-  if (step === 4) document.getElementById('confirm-name').textContent = name;
-  document.getElementById('sp' + step).style.display = 'block';
-  updateProg(step);
-  sgStep = step;
-  window.scrollTo(0, 0);
-};
-sgBack = function(step) {
-  document.getElementById('sp' + sgStep).style.display = 'none';
-  document.getElementById('sp' + step).style.display = 'block';
-  updateProg(step);
-  sgStep = step;
-  window.scrollTo(0, 0);
-};
-</script>
+
+    function renderCongregationSizeOnFile() {
+      var sizeEl = document.getElementById('congregation-size-on-file');
+      if (!sizeEl) return;
+      var size = Number(churchProfile.congregationSize);
+      if (Number.isFinite(size) && size > 0) {
+        sizeEl.textContent = size.toLocaleString() + ' members';
+      } else {
+        sizeEl.textContent = 'your congregation size on file';
+      }
+    }
+
+    function gv(id) {
+      var el = document.getElementById(id);
+      return el ? String(el.value || '').trim() : '';
+    }
+
+    function getStateCode() {
+      var el = document.getElementById('sg-state');
+      if (!el || el.selectedIndex <= 0) return '';
+      return String(el.value || '').trim();
+    }
+
+    function churchSlug(name) {
+      var s = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      return (s || 'your-church').slice(0, 36);
+    }
+
+    function churchInitials(name) {
+      var parts = name.split(/\s+/).filter(function (w) { return w.length > 0; });
+      if (!parts.length) return 'CH';
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    function logoMarkHtml(px, fontPx) {
+      var name = gv('sg-church-name') || 'Your Church';
+      var ini = churchInitials(name);
+      var r = Math.max(6, Math.round(px * 0.22));
+      return '<div style="width:' + px + 'px;height:' + px + 'px;border-radius:' + r + 'px;background:#1A2744;display:flex;align-items:center;justify-content:center;color:#fff;font-family:\'Lora\',serif;font-size:' + fontPx + 'px;font-weight:600">' + ini + '</div>';
+    }
+
+    function syncCongregationFromStep2() {
+      var corrEl = document.getElementById('sg-congregation-correct');
+      if (corrEl && String(corrEl.value || '').trim()) {
+        var cn = Number(String(corrEl.value).trim());
+        if (Number.isFinite(cn) && cn > 0) churchProfile.congregationSize = cn;
+      }
+    }
+
+    function formatCityState() {
+      var city = gv('sg-city');
+      var st = getStateCode();
+      if (city && st) return city + ', ' + st;
+      return city || st || '';
+    }
+
+    function formatAddressOneLine() {
+      var street = gv('sg-street');
+      var rest = formatCityState();
+      var zip = gv('sg-zip');
+      var parts = [];
+      if (street) parts.push(street);
+      if (rest) parts.push(rest);
+      if (zip) parts.push(zip);
+      return parts.join(' · ');
+    }
+
+    function updateStep2LogoPreview() {
+      var el = document.getElementById('sg-logo-preview');
+      if (!el) return;
+      el.innerHTML = logoMarkHtml(130, 28);
+    }
+
+    function renderMarketingPreview() {
+      syncCongregationFromStep2();
+      var name = gv('sg-church-name') || 'Your Church';
+      var slug = churchSlug(name);
+      var loc = formatCityState();
+      var addr = formatAddressOneLine();
+      var size = Number(churchProfile.congregationSize);
+      var memLabel = Number.isFinite(size) && size > 0 ? size.toLocaleString() + ' members' : '';
+      var adminFirst = gv('sg-admin-first');
+      var email = gv('sg-contact-email');
+      var phone = gv('sg-phone');
+      var notes = gv('sg-brand-notes');
+      var shortName = name.split(' ').slice(0, 2).join(' ');
+
+      var previewName = document.getElementById('preview-church-name');
+      if (previewName) previewName.textContent = name;
+      var pa1 = document.getElementById('pa-name1');
+      if (pa1) pa1.textContent = name;
+      var pa3 = document.getElementById('pa-name3');
+      if (pa3) pa3.textContent = name;
+      var pa4 = document.getElementById('pa-name4');
+      if (pa4) pa4.textContent = name.split(' ').slice(0, 3).join(' ');
+      var words = name.split(' ').filter(function (w) { return w.length > 2; });
+      var abbr = words.map(function (w) { return w[0]; }).join('').toUpperCase().slice(0, 3);
+      if (!abbr) abbr = name.slice(0, 3).toUpperCase();
+      var pa2 = document.getElementById('pa-name2');
+      if (pa2) pa2.textContent = abbr;
+
+      var flyerLogo = document.getElementById('pa-flyer-logo');
+      if (flyerLogo) flyerLogo.innerHTML = logoMarkHtml(30, 10);
+      var ft = document.getElementById('pa-flyer-tagline');
+      if (ft) ft.textContent = 'Save on Energy · Support ' + shortName;
+      var fl = document.getElementById('pa-flyer-location');
+      if (fl) fl.textContent = loc || addr || '';
+      var fm = document.getElementById('pa-flyer-members');
+      if (fm) fm.textContent = memLabel;
+      var fc = document.getElementById('pa-flyer-caption');
+      if (fc) fc.textContent = loc ? 'Includes ' + loc + ' on every print' : 'QR code · front & back';
+
+      var tableLogo = document.getElementById('pa-table-logo');
+      if (tableLogo) tableLogo.innerHTML = logoMarkHtml(28, 10);
+      var tc = document.getElementById('pa-table-caption');
+      if (tc) tc.textContent = abbr + ' · welcome table';
+
+      var sh = document.getElementById('pa-social-highlight');
+      var ss = document.getElementById('pa-social-sub');
+      if (sh && ss && Number.isFinite(size) && size > 0) {
+        sh.textContent = size.toLocaleString();
+        ss.textContent = 'members · ' + (loc || 'your community');
+      } else if (sh && ss) {
+        sh.textContent = 'Join us';
+        ss.textContent = 'Support ' + shortName;
+      }
+      var socialLogo = document.getElementById('pa-social-logo');
+      if (socialLogo) socialLogo.innerHTML = logoMarkHtml(38, 12);
+      var sc = document.getElementById('pa-social-caption');
+      if (sc) {
+        var cityWord = loc.split(',')[0] || '';
+        sc.textContent = cityWord ? 'Sized for ' + cityWord + ' feeds' : 'Instagram & Facebook';
+      }
+
+      var eh = document.getElementById('pa-email-header');
+      if (eh) eh.textContent = name.length > 32 ? name.slice(0, 30) + '…' : name;
+      var eb = document.getElementById('pa-email-blurb');
+      if (eb) {
+        var emailBlurb = 'Hi — a quick note from ' + name + '. We are sharing a simple way to save on home energy';
+        if (loc) emailBlurb += ' in ' + loc.split(',')[0];
+        emailBlurb += ', with part of every signup supporting our church.';
+        if (emailBlurb.length > 190) emailBlurb = emailBlurb.slice(0, 187) + '…';
+        eb.textContent = emailBlurb;
+      }
+      var ec = document.getElementById('pa-email-caption');
+      if (ec) ec.textContent = email ? 'Replies to your church inbox' : 'Copy-paste ready';
+
+      var pastorOpening = 'This month, ' + name + ' is offering Home Lari: families save on bills and a share comes back to our ministry';
+      if (Number.isFinite(size) && size > 0) {
+        pastorOpening += ' (about ' + size.toLocaleString() + ' members strong)';
+      }
+      pastorOpening += '. Scan the QR in your bulletin or pick up a card in the lobby.';
+      if (adminFirst) {
+        pastorOpening = adminFirst + ', here is your line: ' + pastorOpening;
+      }
+      if (notes) {
+        pastorOpening += ' Note for our team: ' + (notes.length > 72 ? notes.slice(0, 69) + '…' : notes);
+      }
+      if (pastorOpening.length > 250) pastorOpening = pastorOpening.slice(0, 247) + '…';
+      var pb = document.getElementById('pa-pastor-blurb');
+      if (pb) pb.textContent = pastorOpening;
+      var pc = document.getElementById('pa-pastor-caption');
+      if (pc) pc.textContent = phone ? 'Includes call-to-action & ' + phone : '2-min Sunday announcement';
+
+      var qrLogo = document.getElementById('pa-qr-logo');
+      if (qrLogo) qrLogo.innerHTML = logoMarkHtml(44, 13);
+      var qu = document.getElementById('pa-qr-url');
+      if (qu) qu.textContent = 'homelari.com/' + slug;
+      var qc = document.getElementById('pa-qr-caption');
+      if (qc) qc.textContent = 'Your link: /' + slug;
+
+      refreshFlyerLightbox();
+    }
+
+    function refreshFlyerLightbox() {
+      syncCongregationFromStep2();
+      var name = gv('sg-church-name') || 'Your Church';
+      var size = Number(churchProfile.congregationSize);
+      var loc = formatCityState();
+      var addr = formatAddressOneLine();
+      var shortName = name.split(' ').slice(0, 2).join(' ');
+      var memLabel = Number.isFinite(size) && size > 0 ? size.toLocaleString() + ' members' : '';
+
+      var lg = document.getElementById('flyer-lb-logo');
+      if (lg) lg.innerHTML = logoMarkHtml(72, 22);
+      var elName = document.getElementById('flyer-lb-name');
+      if (elName) elName.textContent = name;
+      var elTag = document.getElementById('flyer-lb-tagline');
+      if (elTag) elTag.textContent = 'Save on Energy · Support ' + shortName;
+      var elLoc = document.getElementById('flyer-lb-loc');
+      if (elLoc) elLoc.textContent = loc || addr || '';
+      var elMem = document.getElementById('flyer-lb-mem');
+      if (elMem) elMem.textContent = memLabel;
+    }
+
+    function openFlyerPreview() {
+      refreshFlyerLightbox();
+      var lb = document.getElementById('flyer-lightbox');
+      if (!lb) return;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFlyerPreview() {
+      var lb = document.getElementById('flyer-lightbox');
+      if (!lb) return;
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function simulateUpload() {
+      setTimeout(function () {
+        document.getElementById('upload-ok').style.display = 'flex';
+      }, 500);
+    }
+
+    function toggleLogoUpload(showUpload) {
+      document.getElementById('new-logo-upload').style.display = showUpload ? 'block' : 'none';
+      if (!showUpload) document.getElementById('upload-ok').style.display = 'none';
+    }
+
+    function toggleCongregationInput(showInput) {
+      document.getElementById('congregation-correct-wrap').style.display = showInput ? 'block' : 'none';
+    }
+
+    function toggleAsset(card) {
+      card.classList.toggle('sel');
+    }
+
+    function pickQty(btn, qty, price) {
+      var btns = document.querySelectorAll('.qty-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('sel');
+      btn.classList.add('sel');
+      var base = 8 + 6.99;
+      document.getElementById('flyer-price').textContent = '$' + price.toFixed(2);
+      document.getElementById('order-total').textContent = '$' + (base + price).toFixed(2);
+    }
+
+    var dashReady = false;
+    function initDash() {
+      if (dashReady) return;
+      dashReady = true;
+      countUp('raised-val', 1275, '$');
+      countUp('subs-val', 85, '');
+      setTimeout(function () {
+        document.getElementById('prog-fill').style.width = '51%';
+      }, 200);
+    }
+
+    function countUp(id, target, prefix) {
+      var el = document.getElementById(id);
+      var current = 0;
+      var step = target / 60;
+      var timer = setInterval(function () {
+        current = Math.min(current + step, target);
+        el.textContent = prefix + Math.round(current).toLocaleString();
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    }
+
+    // Signup panel uses 'show' class - patch the sg panel logic
+    document.addEventListener('DOMContentLoaded', function () {
+      var panels = document.querySelectorAll('.sg-panel');
+      for (var i = 0; i < panels.length; i++) {
+        if (panels[i].classList.contains('show')) {
+          panels[i].style.display = 'block';
+        }
+      }
+      var szInput = document.getElementById('sg-congregation-size');
+      if (szInput && Number(churchProfile.congregationSize) > 0) {
+        szInput.value = String(churchProfile.congregationSize);
+      }
+      renderCongregationSizeOnFile();
+      updateStep2LogoPreview();
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        var lb = document.getElementById('flyer-lightbox');
+        if (lb && lb.classList.contains('open')) closeFlyerPreview();
+      });
+    });
+
+    // Override sgNext/sgBack to use style.display for sg-panels
+    var _sgNext = sgNext;
+    var _sgBack = sgBack;
+    sgNext = function (step) {
+      document.getElementById('sp' + sgStep).style.display = 'none';
+      if (step === 2) {
+        var szEl = document.getElementById('sg-congregation-size');
+        if (szEl) {
+          var n = Number(String(szEl.value || '').trim());
+          if (Number.isFinite(n) && n > 0) churchProfile.congregationSize = n;
+        }
+        renderCongregationSizeOnFile();
+        updateStep2LogoPreview();
+      }
+      var name = (document.getElementById('sg-church-name').value || '').trim() || 'Your Church';
+      if (step === 3) renderMarketingPreview();
+      if (step === 4) document.getElementById('confirm-name').textContent = name;
+      document.getElementById('sp' + step).style.display = 'block';
+      updateProg(step);
+      sgStep = step;
+      window.scrollTo(0, 0);
+    };
+    sgBack = function (step) {
+      document.getElementById('sp' + sgStep).style.display = 'none';
+      document.getElementById('sp' + step).style.display = 'block';
+      updateProg(step);
+      sgStep = step;
+      window.scrollTo(0, 0);
+    };
+  </script>
 </body>
+
 </html>
