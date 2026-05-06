@@ -2550,9 +2550,9 @@
               <div class="sg-full">
                 <label class="sg-label">Church Logo</label>
                 <div
-                  style="display:flex;align-items:center;justify-content:center;background:#fbfaf7;border:1.5px solid var(--border);border-radius:12px;padding:20px">
+                  style="display:flex;align-items:center;justify-content:center;padding:20px 0">
                   <div id="sg-logo-preview"
-                    style="width:130px;height:130px;border-radius:12px;background:#1A2744;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Lora',serif;font-size:16px;font-weight:600;text-align:center;padding:10px">
+                    style="width:130px;height:130px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-family:'Lora',serif;font-size:16px;font-weight:600;text-align:center;padding:10px">
                     GC</div>
                 </div>
                 <label class="sg-label" style="margin-top:16px">Is this your logo?</label>
@@ -3198,11 +3198,14 @@
       return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
     }
 
-    function logoMarkHtml(px, fontPx) {
+    function logoMarkHtml(px, fontPx, withBackground) {
       var name = gv('sg-church-name') || 'Your Church';
       var ini = churchInitials(name);
       var r = Math.max(6, Math.round(px * 0.22));
-      return '<div style="width:' + px + 'px;height:' + px + 'px;border-radius:' + r + 'px;background:#1A2744;display:flex;align-items:center;justify-content:center;color:#fff;font-family:\'Lora\',serif;font-size:' + fontPx + 'px;font-weight:600">' + ini + '</div>';
+      var useBg = withBackground !== false;
+      var bg = useBg ? '#1A2744' : 'transparent';
+      var color = useBg ? '#fff' : 'var(--navy)';
+      return '<div style="width:' + px + 'px;height:' + px + 'px;border-radius:' + r + 'px;background:' + bg + ';display:flex;align-items:center;justify-content:center;color:' + color + ';font-family:\'Lora\',serif;font-size:' + fontPx + 'px;font-weight:600">' + ini + '</div>';
     }
 
     function syncCongregationFromStep2() {
@@ -3234,7 +3237,7 @@
     function updateStep2LogoPreview() {
       var el = document.getElementById('sg-logo-preview');
       if (!el) return;
-      el.innerHTML = logoMarkHtml(130, 28);
+      el.innerHTML = logoMarkHtml(130, 28, false);
     }
 
     function renderMarketingPreview() {
