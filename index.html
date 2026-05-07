@@ -10,6 +10,22 @@
     href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Geller Test Headline Semibold';
+      src: local('Geller Test Headline Semibold'), local('Geller Test');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Geller Test';
+      src: local('Geller Test'), local('Geller Test Headline Semibold');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
       --gold: #C8A44A;
       --gold-light: #F5E8C0;
@@ -676,6 +692,30 @@
       padding: 5px 14px;
       border-radius: 100px;
       margin-bottom: 14px
+    }
+
+    .step-tagline {
+      display: inline-block;
+      background: transparent;
+      padding: 0;
+      margin-bottom: 14px;
+      border-radius: 0;
+      font-family: 'Geller Test Headline Semibold', 'Geller Test', 'Lora', serif;
+      font-size: 64px;
+      font-weight: 600;
+      line-height: 1.02;
+      color: #0B0F4D;
+      text-align: left;
+    }
+
+    .step-tagline .rise {
+      color: #E2AD01;
+      font-style: italic;
+      font-size: 66px;
+    }
+
+    .step-tagline .down {
+      font-size: 62px;
     }
 
     .signup-header h1 {
@@ -2397,9 +2437,9 @@
     <div class="signup-outer">
       <div class="signup-shell">
         <div class="signup-header">
-          <div class="step-pill">⛪ Church Enrollment — Free</div>
+          <div class="step-tagline">Church <span class="rise">Rises.</span><br>Bills go <span class="down">down.</span></div>
           <h1>Enroll Your Church</h1>
-          <p>Get set up in under 10 minutes. No design work required.</p>
+          <p>Get set up in under 10 minutes.</p>
         </div>
         <div class="sg-steps">
           <div class="ss-item">
@@ -2411,7 +2451,7 @@
           </div>
           <div class="ss-line" id="sline2"></div>
           <div class="ss-item">
-            <div class="ss-circle todo" id="sc3">3</div><span class="ss-label todo" id="sl3">Preview</span>
+            <div class="ss-circle todo" id="sc3">3</div><span class="ss-label todo" id="sl3">Marketing Material</span>
           </div>
           <div class="ss-line" id="sline3"></div>
           <div class="ss-item">
@@ -2426,14 +2466,19 @@
             <p class="card-sub">This information personalizes your fundraising page and all marketing materials.</p>
             <div class="sg-grid">
               <div class="sg-full"><label class="sg-label">Church Name <span class="req">*</span></label><input
-                  class="sg-input" id="sg-church-name" type="text" placeholder="e.g. Grace Community Church" /></div>
-              <div><label class="sg-label">First Name <span class="req">*</span></label><input class="sg-input"
-                  id="sg-admin-first" type="text" placeholder="e.g. James" /></div>
-              <div><label class="sg-label">Last Name <span class="req">*</span></label><input class="sg-input"
-                  id="sg-admin-last" type="text" placeholder="e.g. Whitfield" /></div>
+                  class="sg-input" id="sg-church-name" type="text" placeholder="Grace Community Church" /></div>
+              <div class="sg-full"><label class="sg-label">What is your official Position within the church? <span
+                    class="req">*</span></label><input class="sg-input" id="sg-official-position" type="text"
+                  placeholder="Pastor" /></div>
+              <div><label class="sg-label">Your First Name <span class="req">*</span></label><input class="sg-input"
+                  id="sg-admin-first" type="text" placeholder="James" /></div>
+              <div><label class="sg-label">Your Last Name <span class="req">*</span></label><input class="sg-input"
+                  id="sg-admin-last" type="text" placeholder="Whitfield" /></div>
               <div class="sg-full"><label class="sg-label">Church Street Address <span
                     class="req">*</span></label><input class="sg-input" id="sg-street" type="text"
                   placeholder="123 Faith Avenue" /></div>
+              <div class="sg-full"><label class="sg-label">Church Contact Email <span class="req">*</span></label><input
+                  class="sg-input" id="sg-contact-email" type="email" placeholder="office@yourchurch.org" /></div>
               <div><label class="sg-label">City <span class="req">*</span></label><input class="sg-input" id="sg-city"
                   type="text" placeholder="Atlanta" /></div>
               <div>
@@ -2511,8 +2556,6 @@
                   <option>600 – 1,000</option>
                   <option>1,000+</option>
                 </select></div>
-              <div class="sg-full"><label class="sg-label">Church Contact Email <span class="req">*</span></label><input
-                  class="sg-input" id="sg-contact-email" type="email" placeholder="office@yourchurch.org" /></div>
               <div class="sg-full">
                 <label class="sg-label">Phone Number</label>
                 <input class="sg-input" id="sg-phone" type="tel" placeholder="(503) 848-0589" maxlength="14"
